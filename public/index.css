@@ -1,14 +1,26 @@
-.hidden {
-    display: none;
-  }
+#title {
+  text-align: center;
+  background-color: aqua;
+  margin: 0;
+  padding: 0.5em 0em 0.5em 0em;
 
-label {
-    margin-bottom: 10px;
-    display: block;
 }
 
-.brick_type1 {
-  height: 2em;
-  width: 2em;
-  color: aqua;
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#shopping_bag {
+  /* display: block;
+  text-align: right;
+  padding: 0; */
+  float: right;
+}
+
+#login_signup, #shopping_page {
+  display: inline-block;
+  color: black;
+  padding: 2em 0em 2em 2em;
+  font-size: large;
 }

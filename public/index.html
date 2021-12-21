@@ -1,28 +1,18 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Beta Bricks</title>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
-    <script type="module" src="index.js" async defer></script>
-    <script type="module" src="lego_pieces.js"></script>
+    <title>Ice's Lego Store</title>
     <link rel="stylesheet" type="text/css" href="index.css" />
     <meta charset="UTF-8">
     <link rel="icon" href="data:,"><!-- prevent favicon requests -->
 </head>
 
 <body>
-    <h1>Beta Bricks</h1>
-    <p id="greeting">Welcome to our page!</p>
-    <p>
-        <button id="login" disabled>Log in</button>
-        <button id="logout" disabled>Log out</button>
-    </p>
+    <h1 id="title">Ice's Lego Store</h1>
 
-    <p><button id="call" disabled>Make an API call</button>
-
-    <p>Below is the response from the server API:
-
-    <pre id="server-response"></pre>
-
-    <p class="bricks"></p>
+    <nav>
+        <a href="login_signup.html" id="login_signup">LOGIN/SIGNUP</a>
+        <a href="shopping_page.html" id="shopping_page">SHOP</a>
+        <a href="shopping_bag.html" id="shopping_bag"><img src="images/shopping_bag.jpg" alt="shopping bag" style="width: 5em; height: 5em;"></a>
+    </nav>
 </body>
