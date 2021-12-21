@@ -2,7 +2,13 @@
     display: none;
   }
 
-  label {
+label {
     margin-bottom: 10px;
     display: block;
-  }
+}
+
+.brick_type1 {
+  height: 2em;
+  width: 2em;
+  color: aqua;
+}
