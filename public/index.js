@@ -1,17 +1,13 @@
-// fetching the AuthO config as a json file and returning an error if the response is not a 200
 async function fetchAuthConfig() {
   const response = await fetch('/auth-config');
   if (response.ok) {
     return response.json();
   } else {
-    console.log('error');
     throw response;
   }
 }
 
 // global variable that is our entry point to the auth library
-// the linter would complain that we don't use this variable yet, so we stop that with the next line
-// eslint-disable-next-line no-unused-vars
 let auth0 = null;
 
 async function initializeAuth0Client() {
@@ -20,7 +16,6 @@ async function initializeAuth0Client() {
   auth0 = await createAuth0Client({
     domain: config.domain,
     client_id: config.clientId,
-    audience: config.audience,
   });
 }
 
@@ -30,38 +25,7 @@ async function updateAuthUI() {
 
   document.getElementById('login').disabled = isAuthenticated;
   document.getElementById('logout').disabled = !isAuthenticated;
-  document.getElementById('call').disabled = !isAuthenticated;
-
-  if (isAuthenticated) {
-    const user = await auth0.getUser();
-    const el = document.getElementById('greeting');
-    el.textContent = `Hello ${user.name} (${user.email})!`;
-  }
 }
-
-async function callServer() {
-  const token = await auth0.getTokenSilently();
-
-  const el = document.getElementById('server-response');
-  el.textContent = 'loading…';
-
-  const fetchOptions = {
-    credentials: 'same-origin',
-    method: 'GET',
-    headers: { Authorization: 'Bearer ' + token },
-  };
-  const response = await fetch('/api/hello', fetchOptions);
-  if (!response.ok) {
-    // handle the error
-    el.textContent = 'Server error:\n' + response.status;
-    return;
-  }
-
-  // handle the response
-  const data = await response.text();
-  el.textContent = data;
-}
-
 
 async function login() {
   await auth0.loginWithRedirect({
@@ -102,7 +66,6 @@ async function handleAuth0Redirect() {
 function setupListeners() {
   document.getElementById('login').addEventListener('click', login);
   document.getElementById('logout').addEventListener('click', logout);
-  document.getElementById('call').addEventListener('click', callServer);
 }
 
 // this will run when the page loads

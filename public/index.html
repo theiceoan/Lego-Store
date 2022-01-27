@@ -3,6 +3,9 @@
 <head>
     <title>Ice's Lego Store</title>
     <link rel="stylesheet" type="text/css" href="index.css" />
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
+    <script type="module" src="index.js" async defer></script>
+    <script type="module" src="lego_pieces.js" async defer></script>
     <meta charset="UTF-8">
     <link rel="icon" href="data:,"><!-- prevent favicon requests -->
 </head>
@@ -11,8 +14,12 @@
     <h1 id="title">Ice's Lego Store</h1>
 
     <nav>
-        <a href="login_signup.html" id="login_signup">LOGIN/SIGNUP</a>
+        <button id="login" disabled="true">Log in</button>
+        <button id="logout" disabled="true">Log out</button>
         <a href="shopping_page.html" id="shopping_page">SHOP</a>
         <a href="shopping_bag.html" id="shopping_bag"><img src="images/shopping_bag.jpg" alt="shopping bag" style="width: 5em; height: 5em;"></a>
     </nav>
+    <section id="lego_image_section">
+        
+    </section>
 </body>
