@@ -11,7 +11,7 @@ body {
   padding: 0;
 }
 
-#shopping_bag {
+.btn {
   /* display: block;
   text-align: right;
   padding: 0; */
@@ -29,13 +29,14 @@ body {
   width: 10em;
   height: 10em;
   padding: 0em 2em 0em 2em;
-  display: inline-flex;
   box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset;
 }
 
-.buttons {
-  display: inline-block;
+
+#lego_image_section {
+  display: grid;
 }
 
-section {
+div {
+  width: fit-content;
 }
