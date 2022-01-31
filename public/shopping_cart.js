@@ -21,4 +21,18 @@ const shoppingCart = function () {
   if (sessionStorage.getItem('shoppingCart') != null) {
     loadCart();
   }
+
+  // public methods and properties
+  const obj = {};
+
+  // add to cart
+  obj.addItemToCart = function (price, count) {
+    for (const item of cart) {
+      if (cart[item].price === price) {
+        cart[item].count++;
+        saveCart();
+        return;
+      }
+    }
+  };
 };
