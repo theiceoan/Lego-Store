@@ -25,7 +25,7 @@ body {
   font-size: large;
 }
 
-.lego_image {
+img {
   width: 10em;
   height: 10em;
   padding: 0em 2em 0em 2em;
@@ -34,7 +34,11 @@ body {
 
 
 #lego_image_section {
-  display: grid;
+  /* display: grid; */
+}
+
+.image_container {
+  display: inline-block;
 }
 
 div {

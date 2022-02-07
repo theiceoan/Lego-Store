@@ -34,5 +34,17 @@ const shoppingCart = function () {
         return;
       }
     }
+    const item = new Item(price, count);
+    cart.push(item);
+    saveCart();
   };
+  obj.setCountForItem = function(price, count) {
+    for (const i of cart) {
+      if (cart[i].price === price) {
+        cart[i].count = count;
+        break;
+      }
+    }
+  };
+  obj.removeItemFromCart = function
 };

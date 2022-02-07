@@ -4,8 +4,11 @@ import path from 'path';
 import url from 'url';
 
 import authConfig from './auth-config.js';
+import { images } from './client/data-testing.js';
 
 const app = express();
+// this will serve the files present in static/ inside this stage
+app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), 'client')));
 
 // serve the auth config publicly
 app.get('/auth-config', (req, res) => {
@@ -13,11 +16,18 @@ app.get('/auth-config', (req, res) => {
 });
 
 app.get('/images', (req, res) => {
-  res.json(null);
+  res.json(images);
 });
 
-// this will serve the files present in static/ inside this stage
-app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), 'public')));
+app.get('/images/:src', (req, res) => {
+  for (const image of images) {
+    if (image.src === req.params.src) {
+      res.json(image);
+      return;
+    }
+  }
+  res.status(404).send('No match for that source');
+});
 
 // start the server
 const PORT = process.env.PORT || 8080;
