@@ -80,13 +80,20 @@ function showImages(images, where) {
     const numberDisplay = document.createElement('input');
     numberDisplay.value = 0;
     numberDisplay.step = 5;
-    // numberDisplay.setAttribute('class', 'display');
+    numberDisplay.setAttribute('class', 'input_display');
     numberDisplay.type = 'number';
     numberDisplay.min = '0';
+
+    // add to cart button
+    const addToCart = document.createElement('button');
+    addToCart.textContent = 'Add to Cart';
+    addToCart.setAttribute('class', 'add-to-cart btn btn-primary');
+
 
     imageContainer.append(img);
     imageContainer.append(imageDetails);
     imageContainer.append(numberDisplay);
+    imageContainer.append(addToCart);
     where.append(imageContainer);
   }
 }
