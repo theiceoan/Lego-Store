@@ -63,6 +63,7 @@ const el = {};
 
 function showImages(images, where) {
   for (const image of images) {
+    // brick images
     const img = document.createElement('img');
     const imageContainer = document.createElement('div');
     imageContainer.setAttribute('class', 'image_container');
@@ -70,12 +71,22 @@ function showImages(images, where) {
     img.dataset.name = image.name;
     img.dataset.price = image.price;
 
+    // name and price
     const imageDetails = document.createElement('p');
     imageDetails.setAttribute('style', 'white-space: pre;');
     imageDetails.textContent = `Name: ${image.name}\r\nPrice: ${image.price}`;
 
+    // displaying input box for quantity of lego pieces user may want to buy
+    const numberDisplay = document.createElement('input');
+    numberDisplay.value = 0;
+    numberDisplay.step = 5;
+    // numberDisplay.setAttribute('class', 'display');
+    numberDisplay.type = 'number';
+    numberDisplay.min = '0';
+
     imageContainer.append(img);
     imageContainer.append(imageDetails);
+    imageContainer.append(numberDisplay);
     where.append(imageContainer);
   }
 }
