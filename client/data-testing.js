@@ -11,3 +11,7 @@ export const images = [
   { name: 'Brick 2x6', price: '0.72', src: '/images/lego_pieces/piece11.png' },
   { name: 'Block 2x8', price: '0.60', src: '/images/lego_pieces/piece12.png' },
 ];
+
+// give them id's then autogenerate a path
+// how would the company actually update the bricks themselves
+// database maybe

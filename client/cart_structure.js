@@ -28,9 +28,9 @@ export const shoppingCart = function () {
 
   // add to cart
   obj.addItemToCart = function (name, price, count) {
-    for (const item of cart) {
-      if (cart[item].name === name) {
-        cart[item].count++;
+    for (const i of cart) {
+      if (cart[i].name === name) {
+        cart[i].count++;
         saveCart();
         return;
       }
