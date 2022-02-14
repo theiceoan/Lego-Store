@@ -1,6 +1,8 @@
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 // import { json } from './data-testing.js';
 
+// import { showCart } from './shopping_cart';
+
 // // displaying the lego images, item price, and add to cart buttons
 // function showIcons(images, where) {
 //   for (const image of images) {
@@ -31,9 +33,9 @@
 //     container.appendChild(numberDisplay);
 
 //     // add to cart button
-//     const addToCart = document.createElement('button');
-//     addToCart.textContent = 'Add to Cart';
-//     container.appendChild(addToCart);
+//     const addToCartButton = document.createElement('button');
+//     addToCartButton.textContent = 'Add to Cart';
+//     container.appendChild(addToCartButton);
 
 //     where.append(container);
 //   }
@@ -85,16 +87,33 @@ function showImages(images, where) {
     numberDisplay.min = '0';
 
     // add to cart button
-    const addToCart = document.createElement('button');
-    addToCart.textContent = 'Add to Cart';
-    addToCart.setAttribute('class', 'add-to-cart btn btn-primary');
+    const addToCartButton = document.createElement('button');
+    addToCartButton.textContent = 'Add to Cart';
+    addToCartButton.setAttribute('class', 'add-to-cart');
 
 
     imageContainer.append(img);
     imageContainer.append(imageDetails);
     imageContainer.append(numberDisplay);
-    imageContainer.append(addToCart);
+    imageContainer.append(addToCartButton);
     where.append(imageContainer);
+  }
+}
+
+
+function showCart() {
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  const totalCount = document.querySelector('.total-count');
+  totalCount.addEventListener('reset', function () {
+    totalCount.textContent = '';
+  });
+  for (const addToCartButton of addToCartButtons) {
+    addToCartButton.addEventListener('click', function (event) {
+      const brickCounters = document.querySelectorAll('.input_display');
+      for (const brickCounter of brickCounters) {
+        totalCount.textContent = Number(brickCounter.value) + Number(totalCount.textContent);
+      }
+    });
   }
 }
 
@@ -107,6 +126,7 @@ async function loadImages() {
     images = [{ src: 'failed to load images' }];
   }
   showImages(images, el.legoImageSection);
+  showCart();
 }
 
 function prepareHandles() {
