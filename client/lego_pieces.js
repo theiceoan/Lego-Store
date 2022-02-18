@@ -128,6 +128,10 @@ function addToCart(e) {
       console.log(inputValue);
       console.log(event.target);
 
+      // push the value of the event target into an array
+      // add all the elements in the array
+      // make the total = total count
+      // run this every time button is clicked
       event.target.dataset.value = inputValue;
       totalCount.textContent = Number(event.target.dataset.value);
       console.log(totalCount.textContent);
