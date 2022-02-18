@@ -80,9 +80,9 @@ function showImages(images, where) {
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
-    numberDisplay.value = 0;
     numberDisplay.step = 5;
     numberDisplay.setAttribute('class', 'input_display');
+    numberDisplay.value = 0;
     numberDisplay.type = 'number';
     numberDisplay.min = '0';
 
@@ -94,28 +94,54 @@ function showImages(images, where) {
 
     imageContainer.append(img);
     imageContainer.append(imageDetails);
-    imageContainer.append(numberDisplay);
     imageContainer.append(addToCartButton);
+    imageContainer.append(numberDisplay);
     where.append(imageContainer);
   }
 }
 
+// event.target.parentelement to get the div
+// find the input then add that to the cart
+// function showCart() {
+//   const addToCartButtons = document.querySelectorAll('.add-to-cart');
+//   const totalCount = document.querySelector('.total-count');
+//   for (const addToCartButton of addToCartButtons) {
+//     addToCartButton.addEventListener('click', function (event) {
+//       const brickCounters = document.querySelectorAll('.input_display');
+//       for (const brickCounter of brickCounters) {
+//         totalCount.textContent = Number(brickCounter.value) + Number(totalCount.textContent);
+//       }
+//     });
+//   }
+// }
 
-function showCart() {
+function addToCart(e) {
+  console.log(e.target.value);
+  const testing = document.querySelector('.input_display');
+  // console.log(testing.value);
+
+  const inputValue = e.target.value;
   const addToCartButtons = document.querySelectorAll('.add-to-cart');
-  const totalCount = document.querySelector('.total-count');
-  totalCount.addEventListener('reset', function () {
-    totalCount.textContent = '';
-  });
-  for (const addToCartButton of addToCartButtons) {
-    addToCartButton.addEventListener('click', function (event) {
-      const brickCounters = document.querySelectorAll('.input_display');
-      for (const brickCounter of brickCounters) {
-        totalCount.textContent = Number(brickCounter.value) + Number(totalCount.textContent);
-      }
+  let totalCount = document.querySelector('.total-count');
+  for (const button of addToCartButtons) {
+    button.addEventListener('click', function (event) {
+      console.log(inputValue);
+      console.log(event.target);
+
+      event.target.dataset.value = inputValue;
+      totalCount.textContent = Number(event.target.dataset.value);
+      console.log(totalCount.textContent);
     });
   }
 }
+
+function showCart() {
+  const inputDisplays = document.querySelectorAll('.input_display');
+  for (const display of inputDisplays) {
+    display.addEventListener('change', addToCart);
+  }
+}
+
 
 async function loadImages() {
   const response = await fetch('images');
