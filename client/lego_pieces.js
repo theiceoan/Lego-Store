@@ -122,39 +122,50 @@ function showImages(images, where) {
 //     });
 //   }
 // }
+const MyMap = new Map();
 
-function addToCart(e) {
-  console.log(e.target.value);
-  const testing = document.querySelector('.input_display');
+// rename function
+function addToCart() {
   // console.log(testing.value);
-
-  const inputValue = e.target.value;
-  const myMap = new Map();
   const addToCartButtons = document.querySelectorAll('.add-to-cart');
   const totalCount = document.querySelector('.total-count');
+  console.log(MyMap);
   for (const button of addToCartButtons) {
-    myMap.set(e.target.id, e.target.value);
-    console.log(myMap.get(e.target.id));
-    button.addEventListener('click', function (event) {
+    console.log('hello Mtho');
+    // function should be called add to cart
+    button.addEventListener('click', function (e) {
+      // find the input box next to the button
+      // read that value and add it to the cart
+      console.log(e.target.nextSibling);
+      const testing = document.querySelector('.input_display');
+
+      const inputValue = e.target.value;
       console.log(inputValue);
-      console.log(event.target);
+      console.log(e.target);
+      MyMap.set(e.target.id, inputValue);
 
       // push the value of the event target into an array
       // add all the elements in the array
       // make the total = total count
       // run this every time button is clicked
-      event.target.dataset.value = inputValue;
-      totalCount.textContent = Number(event.target.dataset.value);
+      // e.target.dataset.value = inputValue;
+      totalCount.textContent = Number(e.target.dataset.value);
       console.log(totalCount.textContent);
+      // a variable that holds the items i am holding, add to that variable when adding to the cart
+      // from that variable count how many items
+      // array containing objects
     });
   }
 }
 
 function showCart() {
   const inputDisplays = document.querySelectorAll('.input_display');
-  for (const display of inputDisplays) {
-    display.addEventListener('change', addToCart);
-  }
+  // for (const display of inputDisplays) {
+  //   display.addEventListener('change', function() {
+  //     // 
+  //   });
+  // }
+  addToCart();
 }
 
 
