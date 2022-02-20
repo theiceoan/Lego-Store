@@ -63,7 +63,9 @@
 
 const el = {};
 
+
 function showImages(images, where) {
+  let count = 1;
   for (const image of images) {
     // brick images
     const img = document.createElement('img');
@@ -72,6 +74,8 @@ function showImages(images, where) {
     img.src = image.src;
     img.dataset.name = image.name;
     img.dataset.price = image.price;
+    img.dataset.id = 'ID-' + count;
+    count += 1;
 
     // name and price
     const imageDetails = document.createElement('p');
@@ -87,9 +91,13 @@ function showImages(images, where) {
     numberDisplay.min = '0';
 
     // add to cart button
+    // name and id dataset items
     const addToCartButton = document.createElement('button');
     addToCartButton.textContent = 'Add to Cart';
     addToCartButton.setAttribute('class', 'add-to-cart');
+    addToCartButton.dataset.name = img.dataset.name;
+    addToCartButton.dataset.price = img.dataset.price;
+    addToCartButton.dataset.id = img.dataset.id;
 
 
     imageContainer.append(img);
@@ -121,9 +129,12 @@ function addToCart(e) {
   // console.log(testing.value);
 
   const inputValue = e.target.value;
+  const myMap = new Map();
   const addToCartButtons = document.querySelectorAll('.add-to-cart');
-  let totalCount = document.querySelector('.total-count');
+  const totalCount = document.querySelector('.total-count');
   for (const button of addToCartButtons) {
+    myMap.set(e.target.id, e.target.value);
+    console.log(myMap.get(e.target.id));
     button.addEventListener('click', function (event) {
       console.log(inputValue);
       console.log(event.target);
@@ -169,3 +180,7 @@ function pageLoaded() {
 }
 
 window.addEventListener('load', pageLoaded);
+
+
+// array, map or an object
+// preference to map
