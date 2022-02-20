@@ -128,6 +128,8 @@ function addToCart(e) {
       console.log(inputValue);
       console.log(event.target);
 
+      // check what's in the cart
+      // i add the incoming value
       event.target.dataset.value = inputValue;
       totalCount.textContent = Number(event.target.dataset.value);
       console.log(totalCount.textContent);
