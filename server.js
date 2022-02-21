@@ -4,7 +4,7 @@ import path from 'path';
 import url from 'url';
 
 import authConfig from './auth-config.js';
-import { images } from './client/data-testing.js';
+import { images } from './data-testing.js';
 
 const app = express();
 // this will serve the files present in static/ inside this stage
