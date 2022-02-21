@@ -129,27 +129,27 @@ function addToCart() {
   // console.log(testing.value);
   const addToCartButtons = document.querySelectorAll('.add-to-cart');
   const totalCount = document.querySelector('.total-count');
-  console.log(MyMap);
   for (const button of addToCartButtons) {
-    console.log('hello Mtho');
     // function should be called add to cart
     button.addEventListener('click', function (e) {
       // find the input box next to the button
       // read that value and add it to the cart
       console.log(e.target.nextSibling);
-      const testing = document.querySelector('.input_display');
 
-      const inputValue = e.target.value;
+      const inputValue = e.target.nextSibling.value;
       console.log(inputValue);
-      console.log(e.target);
-      MyMap.set(e.target.id, inputValue);
+      console.log(e.target.dataset.id);
+      MyMap.set(e.target.dataset.id, inputValue);
+      console.log(MyMap);
 
       // push the value of the event target into an array
       // add all the elements in the array
       // make the total = total count
       // run this every time button is clicked
+      console.log(MyMap.get(e.target.dataset.id));
+      const count = MyMap.get(e.target.dataset.id);
       // e.target.dataset.value = inputValue;
-      totalCount.textContent = Number(e.target.dataset.value);
+      totalCount.textContent = Number(totalCount.textContent) + Number(count);
       console.log(totalCount.textContent);
       // a variable that holds the items i am holding, add to that variable when adding to the cart
       // from that variable count how many items
