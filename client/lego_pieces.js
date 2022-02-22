@@ -52,10 +52,12 @@ const MyMap = new Map();
 function setUpCart() {
   // console.log(testing.value);
   const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  const cartButton = document.querySelector('.btn-primary');
   for (const button of addToCartButtons) {
     // function should be called add to cart
     button.addEventListener('click', addToCart);
   }
+  cartButton.addEventListener('click', showCart);
 }
 
 function addToCart(e) {
@@ -82,15 +84,23 @@ function addToCart(e) {
   // a variable that holds the items i am holding, add to that variable when adding to the cart
   // from that variable count how many items
   // array containing objects
+  const dropdown = document.querySelector('#my_dropdown');
+  console.log(e.target.dataset.id);
+  const cartItemDiv = document.createElement('div');
+  const nameElement = document.createElement('p');
+  cartItemDiv.append(e.target.parentElement.firstChild.cloneNode(true));
+  nameElement.append(e.target.dataset.name);
+  cartItemDiv.append(nameElement);
+  dropdown.append(cartItemDiv);
+  console.log(dropdown);
 }
 
-function showCart(e) {
-
+function showCart() {
+  document.querySelector('#my_dropdown').classList.toggle('show');
 }
 
 function initiateCart() {
   setUpCart();
-
 }
 
 

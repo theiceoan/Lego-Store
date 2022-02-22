@@ -19,8 +19,13 @@
         <button id="logout" disabled="true">Log out</button>
         <a href="shopping_page.html" id="shopping_page">SHOP</a>
         <!-- <a href="shopping_bag.html" id="shopping_bag"><img src="images/shopping_bag.jpg" alt="shopping bag" style="width: 5em; height: 5em;"></a> -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</button>
-        <button class="clear-cart btn btn-danger">Clear Cart</button>
+        <div class="dropdown_cart">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</button>
+            <button class="clear-cart btn btn-danger">Clear Cart</button>
+            <div id="my_dropdown" class="dropdown_content">
+
+            </div>
+        </div>
     </nav>
     <section id="lego_image_section">
 

@@ -11,11 +11,14 @@ body {
   padding: 0;
 }
 
-.btn {
+.dropdown_cart {
   /* display: block;
   text-align: right;
   padding: 0; */
   float: right;
+  position: relative;
+  display: inline-block;
+
 }
 
 #login_signup, #shopping_page {
@@ -44,3 +47,36 @@ img {
 div {
   width: fit-content;
 }
+
+.btn {
+  background-color: rgb(0, 132, 255);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover, .btn:focus {
+  background-color: aqua;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown_content p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown_content p:hover {background-color: #ddd}
+
+.show {display:block;}
