@@ -11,7 +11,7 @@ function showImages(images, where) {
     img.src = image.src;
     img.dataset.name = image.name;
     img.dataset.price = image.price;
-    img.id = image.id;
+    img.dataset.id = image.id;
 
     // name and price
     const imageDetails = document.createElement('p');
@@ -41,6 +41,8 @@ function showImages(images, where) {
     imageContainer.append(addToCartButton);
     imageContainer.append(numberDisplay);
     where.append(imageContainer);
+
+    img.addEventListener('mouseenter', setUpCart);
   }
 }
 
@@ -51,21 +53,30 @@ function showImages(images, where) {
 const IMAGEIDS = [];
 
 function addToLocalStorage(images) {
-  for (const image of images) {
-    // console.log(image.id);
-  }
+  
 }
 
-function prepareCart() {
-  const addToCartButtons = document.querySelectorAll('.add-to-cart');
-  for (const button of addToCartButtons) {
-    // function should be called add to cart
-    button.addEventListener('click', setUpCart);
-  }
-}
+// function prepareCart() {
+//   const addToCartButtons = document.querySelectorAll('.add-to-cart');
+//   for (const button of addToCartButtons) {
+//     // function should be called add to cart
+//     button.addEventListener('click', setUpCart);
+//   }
+// }
 
-function setUpCart(e) {
+async function setUpCart(e) {
+  const images = document.querySelectorAll('img');
+
   console.log(e.target);
+  const response = await fetch('/images/' + e.target.dataset.id);
+  console.log(response);
+  if (response.ok) {
+    const detail = await response.json();
+    console.log(detail);
+    window.localStorage.setItem(e.target.dataset.id, detail);
+  } else {
+    console.log('failed to send message', response);
+  }
 }
 
 async function loadImages() {
@@ -78,6 +89,7 @@ async function loadImages() {
   }
   showImages(images, el.legoImageSection);
   addToLocalStorage(images);
+  // prepareCart();
 }
 
 function prepareHandles() {
