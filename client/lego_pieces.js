@@ -48,17 +48,17 @@ function showImages(images, where) {
 // event listeners on buttons
 // get the id's of buttons and add them all to an array
 // if the id in the array matches image.id then move object into local storage
+const IMAGEIDS = [];
 
 function addToLocalStorage(images) {
   for (const image of images) {
-    console.log(image.id);
+    // console.log(image.id);
   }
 }
 
-function setUpCart() {
-  
+function setUpCart(e) {
+  console.log(e.target);
 }
-
 
 async function loadImages() {
   const response = await fetch('images');
@@ -69,16 +69,21 @@ async function loadImages() {
     images = [{ src: 'failed to load images' }];
   }
   showImages(images, el.legoImageSection);
-  addToCart(images);
+  addToLocalStorage(images);
 }
 
 function prepareHandles() {
   el.legoImageSection = document.querySelector('#lego_image_section');
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  for (const button of addToCartButtons) {
+    // function should be called add to cart
+    button.addEventListener('click', setUpCart);
+  }
 }
 
 function pageLoaded() {
-  prepareHandles();
   loadImages();
+  prepareHandles();
 }
 
 window.addEventListener('load', pageLoaded);
