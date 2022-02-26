@@ -56,6 +56,14 @@ function addToLocalStorage(images) {
   }
 }
 
+function prepareCart() {
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+  for (const button of addToCartButtons) {
+    // function should be called add to cart
+    button.addEventListener('click', setUpCart);
+  }
+}
+
 function setUpCart(e) {
   console.log(e.target);
 }
@@ -74,11 +82,6 @@ async function loadImages() {
 
 function prepareHandles() {
   el.legoImageSection = document.querySelector('#lego_image_section');
-  const addToCartButtons = document.querySelectorAll('.add-to-cart');
-  for (const button of addToCartButtons) {
-    // function should be called add to cart
-    button.addEventListener('click', setUpCart);
-  }
 }
 
 function pageLoaded() {
