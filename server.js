@@ -19,15 +19,19 @@ app.get('/images', (req, res) => {
   res.json(images);
 });
 
-app.get('/images/:src', (req, res) => {
+app.get('/images/:id', (req, res) => {
   for (const image of images) {
-    if (image.src === req.params.src) {
+    if (image.id === req.params.id) {
       res.json(image);
       return;
     }
   }
   res.status(404).send('No match for that source');
 });
+
+// app.post('/images', express.json(), (req, res) => {
+
+// })
 
 // start the server
 const PORT = process.env.PORT || 8080;

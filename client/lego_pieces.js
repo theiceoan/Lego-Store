@@ -3,7 +3,6 @@ const el = {};
 
 
 function showImages(images, where) {
-  let count = 1;
   for (const image of images) {
     // brick images
     const img = document.createElement('img');
@@ -12,8 +11,7 @@ function showImages(images, where) {
     img.src = image.src;
     img.dataset.name = image.name;
     img.dataset.price = image.price;
-    img.dataset.id = 'ID-' + count;
-    count += 1;
+    img.id = image.id;
 
     // name and price
     const imageDetails = document.createElement('p');
@@ -35,7 +33,7 @@ function showImages(images, where) {
     addToCartButton.setAttribute('class', 'add-to-cart');
     addToCartButton.dataset.name = img.dataset.name;
     addToCartButton.dataset.price = img.dataset.price;
-    addToCartButton.dataset.id = img.dataset.id;
+    addToCartButton.dataset.id = img.id;
 
 
     imageContainer.append(img);
@@ -46,61 +44,19 @@ function showImages(images, where) {
   }
 }
 
-const MyMap = new Map();
+// const MyMap = new Map();
+// event listeners on buttons
+// get the id's of buttons and add them all to an array
+// if the id in the array matches image.id then move object into local storage
 
-// rename function
-function setUpCart() {
-  // console.log(testing.value);
-  const addToCartButtons = document.querySelectorAll('.add-to-cart');
-  const cartButton = document.querySelector('.btn-primary');
-  for (const button of addToCartButtons) {
-    // function should be called add to cart
-    button.addEventListener('click', addToCart);
+function addToLocalStorage(images) {
+  for (const image of images) {
+    console.log(image.id);
   }
-  cartButton.addEventListener('click', showCart);
 }
 
-function addToCart(e) {
-  const totalCount = document.querySelector('.total-count');
-  // find the input box next to the button
-  // read that value and add it to the cart
-  console.log(e.target.nextSibling);
-
-  const inputValue = e.target.nextSibling.value;
-  console.log(inputValue);
-  console.log(e.target.dataset.id);
-  MyMap.set(e.target.dataset.id, inputValue);
-  console.log(MyMap);
-
-  // push the value of the event target into an array
-  // add all the elements in the array
-  // make the total = total count
-  // run this every time button is clicked
-  console.log(MyMap.get(e.target.dataset.id));
-  const count = MyMap.get(e.target.dataset.id);
-  // e.target.dataset.value = inputValue;
-  totalCount.textContent = Number(totalCount.textContent) + Number(count);
-  console.log(totalCount.textContent);
-  // a variable that holds the items i am holding, add to that variable when adding to the cart
-  // from that variable count how many items
-  // array containing objects
-  const dropdown = document.querySelector('#my_dropdown');
-  console.log(e.target.dataset.id);
-  const cartItemDiv = document.createElement('div');
-  const nameElement = document.createElement('p');
-  cartItemDiv.append(e.target.parentElement.firstChild.cloneNode(true));
-  nameElement.append(e.target.dataset.name);
-  cartItemDiv.append(nameElement);
-  dropdown.append(cartItemDiv);
-  console.log(dropdown);
-}
-
-function showCart() {
-  document.querySelector('#my_dropdown').classList.toggle('show');
-}
-
-function initiateCart() {
-  setUpCart();
+function setUpCart() {
+  
 }
 
 
@@ -113,7 +69,7 @@ async function loadImages() {
     images = [{ src: 'failed to load images' }];
   }
   showImages(images, el.legoImageSection);
-  initiateCart();
+  addToCart(images);
 }
 
 function prepareHandles() {
