@@ -1,6 +1,6 @@
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 const el = {};
-
+window.localStorage.clear();
 
 function showImages(images, where) {
   for (const image of images) {
@@ -42,7 +42,7 @@ function showImages(images, where) {
     imageContainer.append(numberDisplay);
     where.append(imageContainer);
 
-    img.addEventListener('click', setUpCart);
+    addToCartButton.addEventListener('click', setUpCart);
   }
 }
 
@@ -71,7 +71,7 @@ async function setUpCart(e) {
   const response = await fetch('/images/' + e.target.dataset.id);
   if (response.ok) {
     console.log(response);
-    const detail = response.json();
+    const detail = await response.json();
     console.log(detail);
     window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
     const newObject = window.localStorage.getItem(e.target.dataset.id);
