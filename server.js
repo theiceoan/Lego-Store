@@ -4,6 +4,7 @@ import path from 'path';
 import url from 'url';
 
 import authConfig from './auth-config.js';
+// change name of images to dataProduct
 import { images } from './data-testing.js';
 
 const app = express();
@@ -20,13 +21,15 @@ app.get('/images', (req, res) => {
 });
 
 app.get('/images/:id', (req, res) => {
+  // console.table(images);
   for (const image of images) {
-    if (image.id === req.params.id) {
+    // eslint-disable-next-line eqeqeq
+    if (image.id == req.params.id) {
       res.json(image);
       return;
     }
   }
-  res.status(404).send('No match for that source');
+  // res.status(404).send('No match for that source');
 });
 
 // app.post('/images', express.json(), (req, res) => {

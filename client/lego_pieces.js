@@ -42,7 +42,7 @@ function showImages(images, where) {
     imageContainer.append(numberDisplay);
     where.append(imageContainer);
 
-    img.addEventListener('mouseenter', setUpCart);
+    img.addEventListener('click', setUpCart);
   }
 }
 
@@ -69,11 +69,13 @@ async function setUpCart(e) {
 
   console.log(e.target);
   const response = await fetch('/images/' + e.target.dataset.id);
-  console.log(response);
   if (response.ok) {
-    const detail = await response.json();
+    console.log(response);
+    const detail = response.json();
     console.log(detail);
-    window.localStorage.setItem(e.target.dataset.id, detail);
+    window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
+    const newObject = window.localStorage.getItem(e.target.dataset.id);
+    console.log(JSON.parse(newObject), newObject);
   } else {
     console.log('failed to send message', response);
   }
