@@ -16,7 +16,7 @@ function showImages(images, where) {
     // name and price
     const imageDetails = document.createElement('p');
     imageDetails.setAttribute('style', 'white-space: pre;');
-    imageDetails.textContent = `Name: ${image.name}\r\nPrice: ${image.price}`;
+    imageDetails.textContent = `Name: ${image.name}\r\nPrice: £${image.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
@@ -33,7 +33,7 @@ function showImages(images, where) {
     addToCartButton.setAttribute('class', 'add-to-cart');
     addToCartButton.dataset.name = img.dataset.name;
     addToCartButton.dataset.price = img.dataset.price;
-    addToCartButton.dataset.id = img.id;
+    addToCartButton.dataset.id = img.dataset.id;
 
 
     imageContainer.append(img);
@@ -43,6 +43,7 @@ function showImages(images, where) {
     where.append(imageContainer);
 
     addToCartButton.addEventListener('click', setUpCart);
+    // addToCartButton.addEventListener('click', addToCart);
   }
 }
 
@@ -51,10 +52,6 @@ function showImages(images, where) {
 // get the id's of buttons and add them all to an array
 // if the id in the array matches image.id then move object into local storage
 const IMAGEIDS = [];
-
-function addToLocalStorage(images) {
-  
-}
 
 // function prepareCart() {
 //   const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -66,20 +63,31 @@ function addToLocalStorage(images) {
 
 async function setUpCart(e) {
   const images = document.querySelectorAll('img');
+  const showCartButton = document.querySelector('.btn-primary');
 
-  console.log(e.target);
-  const response = await fetch('/images/' + e.target.dataset.id);
+  const imageID = e.target.parentElement.firstChild.dataset.id;
+  // console.log(e.target);
+  const response = await fetch('/images/' + imageID);
   if (response.ok) {
     console.log(response);
     const detail = await response.json();
     console.log(detail);
     window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
+    // addToCart();
     const newObject = window.localStorage.getItem(e.target.dataset.id);
-    console.log(JSON.parse(newObject), newObject);
+    console.log(detail.src);
+    showCartButton.append(detail.src);
   } else {
     console.log('failed to send message', response);
   }
 }
+
+// function addToCart(e) {
+//   const totalCount = document.querySelector('.total-count');
+
+//   const storedBrick = window.localStorage.getItem(e.target.dataset.id);
+//   console.log(e.target, window.localStorage);
+// }
 
 async function loadImages() {
   const response = await fetch('images');
@@ -90,7 +98,6 @@ async function loadImages() {
     images = [{ src: 'failed to load images' }];
   }
   showImages(images, el.legoImageSection);
-  addToLocalStorage(images);
   // prepareCart();
 }
 
