@@ -51,7 +51,6 @@ function showImages(images, where) {
 // event listeners on buttons
 // get the id's of buttons and add them all to an array
 // if the id in the array matches image.id then move object into local storage
-const IMAGEIDS = [];
 
 // function prepareCart() {
 //   const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -76,7 +75,7 @@ async function setUpCart(e) {
     console.log(detail);
     window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
     // addToCart();
-    const newObject = window.localStorage.getItem(e.target.dataset.id);
+    // const newObject = window.localStorage.getItem(e.target.dataset.id);
     img.id = detail.id;
     img.src = detail.src;
 
@@ -90,8 +89,6 @@ async function setUpCart(e) {
     console.log('failed to send message', response);
   }
 }
-const showCartButton = document.querySelector('.btn');
-showCartButton.addEventListener('click', showCart);
 
 function showCart() {
   document.querySelector('#my_dropdown').classList.toggle('show');
@@ -118,6 +115,7 @@ async function loadImages() {
 
 function prepareHandles() {
   el.legoImageSection = document.querySelector('#lego_image_section');
+  document.querySelector('.btn').addEventListener('click', showCart);
 }
 
 function pageLoaded() {

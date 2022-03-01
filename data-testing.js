@@ -43,7 +43,7 @@ export const images = [
 // database maybe
 
 
-// function in data file 
+// function in data file
 // getting the id then for each brick.id it returns the brick
 
 // get location of brick id using window.location.search

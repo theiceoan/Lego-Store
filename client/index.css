@@ -17,8 +17,6 @@ body {
   padding: 0; */
   float: right;
   position: relative;
-  display: inline-block;
-
 }
 
 #login_signup, #shopping_page {
@@ -33,11 +31,6 @@ img {
   height: 10em;
   padding: 0em 2em 0em 2em;
   box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset;
-}
-
-
-#lego_image_section {
-  /* display: grid; */
 }
 
 .image_container {
