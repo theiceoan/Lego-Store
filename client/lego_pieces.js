@@ -62,8 +62,10 @@ const IMAGEIDS = [];
 // }
 
 async function setUpCart(e) {
-  const images = document.querySelectorAll('img');
   const showCartButton = document.querySelector('.btn-primary');
+  const img = document.createElement('img');
+  const imageContainer = document.createElement('div');
+  const imageDetails = document.createElement('p');
 
   const imageID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
@@ -75,8 +77,15 @@ async function setUpCart(e) {
     window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
     // addToCart();
     const newObject = window.localStorage.getItem(e.target.dataset.id);
-    console.log(detail.src);
-    showCartButton.append(detail.src);
+    img.id = detail.id;
+    img.src = detail.src;
+
+    imageDetails.setAttribute('style', 'white-space: pre;');
+    imageDetails.textContent = `Name: ${detail.name}\r\nPrice: £${detail.price}`;
+
+    imageContainer.append(img);
+    imageContainer.append(imageDetails);
+    showCartButton.append(imageContainer);
   } else {
     console.log('failed to send message', response);
   }
