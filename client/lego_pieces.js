@@ -86,12 +86,12 @@ async function setUpCart(e) {
     imageContainer.append(img);
     imageContainer.append(imageDetails);
     showCartButton.append(imageContainer);
-
-    showCartButton.addEventListener('click', showCart);
   } else {
     console.log('failed to send message', response);
   }
 }
+const showCartButton = document.querySelector('.btn');
+showCartButton.addEventListener('click', showCart);
 
 function showCart() {
   document.querySelector('#my_dropdown').classList.toggle('show');
