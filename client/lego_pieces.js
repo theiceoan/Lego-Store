@@ -86,9 +86,15 @@ async function setUpCart(e) {
     imageContainer.append(img);
     imageContainer.append(imageDetails);
     showCartButton.append(imageContainer);
+
+    showCartButton.addEventListener('click', showCart);
   } else {
     console.log('failed to send message', response);
   }
+}
+
+function showCart() {
+  document.querySelector('.btn-primary').classList.toggle('show');
 }
 
 // function addToCart(e) {
