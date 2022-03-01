@@ -62,7 +62,7 @@ const IMAGEIDS = [];
 // }
 
 async function setUpCart(e) {
-  const showCartButton = document.querySelector('.btn-primary');
+  const showCartButton = document.querySelector('#my_dropdown');
   const img = document.createElement('img');
   const imageContainer = document.createElement('div');
   const imageDetails = document.createElement('p');
@@ -94,7 +94,7 @@ async function setUpCart(e) {
 }
 
 function showCart() {
-  document.querySelector('.btn-primary').classList.toggle('show');
+  document.querySelector('#my_dropdown').classList.toggle('show');
 }
 
 // function addToCart(e) {
