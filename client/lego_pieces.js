@@ -101,6 +101,11 @@ function showCart() {
 //   console.log(e.target, window.localStorage);
 // }
 
+// does this dataset id = that dataset id
+// count how many times that specific one has been put and then put that in cart
+// right now, the images in the shopping cart are not useful
+// should display the image, price, quantity
+
 async function loadImages() {
   const response = await fetch('images');
   let images;
