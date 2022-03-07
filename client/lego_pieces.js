@@ -77,6 +77,7 @@ async function setUpCart(e) {
 
   const img = document.createElement('img');
   const imageContainer = document.createElement('div');
+  
 
   img.src = data.src;
   img.id = data.id;
