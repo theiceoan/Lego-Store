@@ -1,10 +1,16 @@
+/* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 const el = {};
 window.localStorage.clear();
 
+export const cartContents = [];
+// put images in loadedBricks
+export let loadedBricks = [];
+
 function showImages(images, where) {
   for (const image of images) {
     // brick images
+    loadedBricks.push(image);
     const img = document.createElement('img');
     const imageContainer = document.createElement('div');
     imageContainer.setAttribute('class', 'image_container');
@@ -42,8 +48,8 @@ function showImages(images, where) {
     imageContainer.append(numberDisplay);
     where.append(imageContainer);
 
-    addToCartButton.addEventListener('click', setUpCart);
-    // addToCartButton.addEventListener('click', addToCart);
+    addToCartButton.addEventListener('click', addToCart);
+    addToCartButton.addEventListener('click', getBricks);
   }
 }
 
@@ -57,23 +63,25 @@ const IMAGEIDS = [];
 //   const addToCartButtons = document.querySelectorAll('.add-to-cart');
 //   for (const button of addToCartButtons) {
 //     // function should be called add to cart
-//     button.addEventListener('click', setUpCart);
+//     button.addEventListener('click', addToCart);
 //   }
 // }
 
 // change name to addToCart
-async function setUpCart(e) {
+async function addToCart(e) {
   const imageID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
   const response = await fetch('/images/' + imageID);
   if (response.ok) {
     const detail = await response.json();
     console.log(detail);
-    window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
+    // window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
+    cartContents.push(e.target.dataset.id);
+    console.log(cartContents);
   } else {
     console.log('failed to send message', response);
   }
-  const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
+  // const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
 
   if (e.target.nextSibling.value > 0) {
     const img = document.createElement('img');
@@ -81,18 +89,28 @@ async function setUpCart(e) {
     const imageContainer = document.createElement('div');
     const dropDown = document.querySelector('#my_dropdown');
 
-    img.src = data.src;
-    img.id = data.id;
-    imageContainer.append(img);
+    // img.src = data.src;
+    // img.id = data.id;
+    // imageContainer.append(img);
 
-    shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-    shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
-    imageContainer.append(shoppingCartDetails);
-    dropDown.append(imageContainer);
+    // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+    // shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
+    // imageContainer.append(shoppingCartDetails);
+    // dropDown.append(imageContainer);
   }
 }
 const showCartButton = document.querySelector('.btn');
 showCartButton.addEventListener('click', showCart);
+
+function getBricks(e) {
+  const imageID = e.target.parentElement.firstChild.dataset.id;
+  for (const brick of loadedBricks) {
+    // console.log(brick.id);
+    if (brick.id == imageID) {
+      console.log(brick);
+    }
+  }
+}
 
 function showCart() {
   console.log(window.localStorage);
@@ -116,7 +134,7 @@ async function loadImages() {
   }
   showImages(images, el.legoImageSection);
   // prepareCart();
-  //change from showImages to showBricks
+  // change from showImages to showBricks
 }
 
 function prepareHandles() {
