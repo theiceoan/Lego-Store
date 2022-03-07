@@ -62,38 +62,27 @@ const IMAGEIDS = [];
 // }
 
 async function setUpCart(e) {
-  const showCartButton = document.querySelector('#my_dropdown');
-  const img = document.createElement('img');
-  const imageContainer = document.createElement('div');
-  const imageDetails = document.createElement('p');
-
   const imageID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
   const response = await fetch('/images/' + imageID);
   if (response.ok) {
-    console.log(response);
     const detail = await response.json();
     console.log(detail);
     window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
-    // addToCart();
-    const newObject = window.localStorage.getItem(e.target.dataset.id);
-    img.id = detail.id;
-    img.src = detail.src;
-
-    imageDetails.setAttribute('style', 'white-space: pre;');
-    imageDetails.textContent = `Name: ${detail.name}\r\nPrice: £${detail.price}`;
-
-    imageContainer.append(img);
-    imageContainer.append(imageDetails);
-    showCartButton.append(imageContainer);
   } else {
     console.log('failed to send message', response);
   }
+  const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
+  console.log(data);
+
+  const img = document.createElement('img');
+  const imageContainer = document.createElement('div');
 }
 const showCartButton = document.querySelector('.btn');
 showCartButton.addEventListener('click', showCart);
 
 function showCart() {
+  console.log(window.localStorage);
   document.querySelector('#my_dropdown').classList.toggle('show');
 }
 
