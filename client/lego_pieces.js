@@ -73,15 +73,18 @@ async function setUpCart(e) {
     console.log('failed to send message', response);
   }
   const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
-  console.log(data);
 
-  const img = document.createElement('img');
-  const imageContainer = document.createElement('div');
-  
+  if (e.target.nextSibling.value > 0) {
+    const img = document.createElement('img');
+    const shoppingCartDetails = document.createElement('p');
+    const imageContainer = document.createElement('div');
+    const dropDown = document.querySelector('#my_dropdown');
 
-  img.src = data.src;
-  img.id = data.id;
-  imageContainer.append(img);
+    img.src = data.src;
+    img.id = data.id;
+    imageContainer.append(img);
+    dropDown.append(imageContainer);
+  }
 }
 const showCartButton = document.querySelector('.btn');
 showCartButton.addEventListener('click', showCart);
