@@ -14,9 +14,9 @@ function showImages(images, where) {
     img.dataset.id = image.id;
 
     // name and price
-    const imageDetails = document.createElement('p');
-    imageDetails.setAttribute('style', 'white-space: pre;');
-    imageDetails.textContent = `Name: ${image.name}\r\nPrice: £${image.price}`;
+    const shoppingCartDetails = document.createElement('p');
+    shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+    shoppingCartDetails.textContent = `Name: ${image.name}\r\nPrice: £${image.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
@@ -37,7 +37,7 @@ function showImages(images, where) {
 
 
     imageContainer.append(img);
-    imageContainer.append(imageDetails);
+    imageContainer.append(shoppingCartDetails);
     imageContainer.append(addToCartButton);
     imageContainer.append(numberDisplay);
     where.append(imageContainer);
@@ -61,6 +61,7 @@ const IMAGEIDS = [];
 //   }
 // }
 
+// change name to addToCart
 async function setUpCart(e) {
   const imageID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
@@ -83,6 +84,10 @@ async function setUpCart(e) {
     img.src = data.src;
     img.id = data.id;
     imageContainer.append(img);
+
+    shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+    shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
+    imageContainer.append(shoppingCartDetails);
     dropDown.append(imageContainer);
   }
 }
@@ -111,6 +116,7 @@ async function loadImages() {
   }
   showImages(images, el.legoImageSection);
   // prepareCart();
+  //change from showImages to showBricks
 }
 
 function prepareHandles() {
