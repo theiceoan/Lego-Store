@@ -5,7 +5,8 @@ window.localStorage.clear();
 
 export const cartContents = [];
 // put images in loadedBricks
-export let loadedBricks = [];
+// move bricks into server, create an API
+export const loadedBricks = [];
 
 function showImages(images, where) {
   for (const image of images) {
@@ -18,6 +19,9 @@ function showImages(images, where) {
     img.dataset.name = image.name;
     img.dataset.price = image.price;
     img.dataset.id = image.id;
+
+    // brute force - delete everything in basket then repopulate
+    // if a brick is the same as a brick already in the basket, update the DOM
 
     // name and price
     const shoppingCartDetails = document.createElement('p');
@@ -71,49 +75,78 @@ const IMAGEIDS = [];
 async function addToCart(e) {
   const imageID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
-  const response = await fetch('/images/' + imageID);
-  if (response.ok) {
-    const detail = await response.json();
-    console.log(detail);
-    // window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
-    cartContents.push(e.target.dataset.id);
-    console.log(cartContents);
-  } else {
-    console.log('failed to send message', response);
+  // if the brick is in the basket, then we update the quantity and price
+  // stop/return
+  // console.log(cartContents.indexOf(e.target.dataset.id));
+  // console.log(cartContents);
+  if (cartContents.indexOf(e.target.dataset.id) == -1) {
+    const response = await fetch('/images/' + imageID);
+    if (response.ok) {
+      const detail = await response.json();
+      console.log(detail);
+      // window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
+      cartContents.push(e.target.dataset.id);
+      // console.log(cartContents);
+    } else {
+      console.log('failed to send message', response);
+    }
   }
   // const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
 
-  if (e.target.nextSibling.value > 0) {
-    const img = document.createElement('img');
-    const shoppingCartDetails = document.createElement('p');
-    const imageContainer = document.createElement('div');
-    const dropDown = document.querySelector('#my_dropdown');
+  // if (e.target.nextSibling.value > 0) {
+  // const img = document.createElement('img');
+  // const shoppingCartDetails = document.createElement('p');
+  // const imageContainer = document.createElement('div');
+  // const dropDown = document.querySelector('#my_dropdown');
 
-    // img.src = data.src;
-    // img.id = data.id;
-    // imageContainer.append(img);
+  // img.src = data.src;
+  // img.id = data.id;
+  // imageContainer.append(img);
 
-    // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-    // shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
-    // imageContainer.append(shoppingCartDetails);
-    // dropDown.append(imageContainer);
-  }
+  // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+  // shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
+  // imageContainer.append(shoppingCartDetails);
+  // dropDown.append(imageContainer);
+  // }
 }
 const showCartButton = document.querySelector('.btn');
 showCartButton.addEventListener('click', showCart);
 
 function getBricks(e) {
+  clearCart();
   const imageID = e.target.parentElement.firstChild.dataset.id;
+  const dropDown = document.querySelector('#my_dropdown');
+  const img = document.createElement('img');
+  const shoppingCartDetails = document.createElement('p');
+  const cartImageContainer = document.createElement('div');
   for (const brick of loadedBricks) {
     // console.log(brick.id);
     if (brick.id == imageID) {
-      console.log(brick);
+      // attempting to get the bricks in cart to be unique
+      console.log(cartContents.indexOf(brick.id));
+      // console.log(brick);
+      brick.count = Number(brick.count) + Number(e.target.nextSibling.value);
+      // console.log(e.target.nextSibling.value);
+      img.id = brick.id;
+      img.src = brick.src;
+      cartImageContainer.append(img);
+
+      // have an array of id's with not just originals
+      shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+      shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
+      cartImageContainer.append(shoppingCartDetails);
+      dropDown.append(cartImageContainer);
     }
   }
 }
 
+function clearCart() {
+  const dropDown = document.querySelector('#my_dropdown');
+  dropDown.innerHTML = '';
+}
+
 function showCart() {
-  console.log(window.localStorage);
+  // console.log(window.localStorage);
   document.querySelector('#my_dropdown').classList.toggle('show');
 }
 
