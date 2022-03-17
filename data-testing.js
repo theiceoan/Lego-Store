@@ -1,4 +1,4 @@
-export const images = [
+export const bricks = [
   { id: 1, name: 'Brick 3x2', price: 0.67, stock: 500, count: 0, src: '/images/lego_pieces/piece1.png' },
   { id: 2, name: 'Brick 2x2', price: 0.77, stock: 500, count: 0, src: '/images/lego_pieces/piece2.png' },
   { id: 3, name: 'Brick 2x4', price: 0.45, stock: 500, count: 0, src: '/images/lego_pieces/piece3.png' },

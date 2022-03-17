@@ -4,21 +4,21 @@ const el = {};
 window.localStorage.clear();
 
 export const cartContents = [];
-// put images in loadedBricks
+// put bricks in loadedBricks
 // move bricks into server, create an API
 export const loadedBricks = [];
 
-function showImages(images, where) {
-  for (const image of images) {
-    // brick images
-    loadedBricks.push(image);
+function showbricks(bricks, where) {
+  for (const brick of bricks) {
+    // bricks
+    loadedBricks.push(brick);
     const img = document.createElement('img');
-    const imageContainer = document.createElement('div');
-    imageContainer.setAttribute('class', 'image_container');
-    img.src = image.src;
-    img.dataset.name = image.name;
-    img.dataset.price = image.price;
-    img.dataset.id = image.id;
+    const brickContainer = document.createElement('div');
+    brickContainer.setAttribute('class', 'brick_container');
+    img.src = brick.src;
+    img.dataset.name = brick.name;
+    img.dataset.price = brick.price;
+    img.dataset.id = brick.id;
 
     // brute force - delete everything in basket then repopulate
     // if a brick is the same as a brick already in the basket, update the DOM
@@ -26,7 +26,7 @@ function showImages(images, where) {
     // name and price
     const shoppingCartDetails = document.createElement('p');
     shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-    shoppingCartDetails.textContent = `Name: ${image.name}\r\nPrice: £${image.price}`;
+    shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
@@ -46,11 +46,11 @@ function showImages(images, where) {
     addToCartButton.dataset.id = img.dataset.id;
 
 
-    imageContainer.append(img);
-    imageContainer.append(shoppingCartDetails);
-    imageContainer.append(addToCartButton);
-    imageContainer.append(numberDisplay);
-    where.append(imageContainer);
+    brickContainer.append(img);
+    brickContainer.append(shoppingCartDetails);
+    brickContainer.append(addToCartButton);
+    brickContainer.append(numberDisplay);
+    where.append(brickContainer);
 
     addToCartButton.addEventListener('click', addToCart);
     addToCartButton.addEventListener('click', getBricks);
@@ -60,8 +60,8 @@ function showImages(images, where) {
 // const MyMap = new Map();
 // event listeners on buttons
 // get the id's of buttons and add them all to an array
-// if the id in the array matches image.id then move object into local storage
-const IMAGEIDS = [];
+// if the id in the array matches brick.id then move object into local storage
+const brickIDS = [];
 
 // function prepareCart() {
 //   const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -73,14 +73,14 @@ const IMAGEIDS = [];
 
 // change name to addToCart
 async function addToCart(e) {
-  const imageID = e.target.parentElement.firstChild.dataset.id;
+  const brickID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
   // if the brick is in the basket, then we update the quantity and price
   // stop/return
   // console.log(cartContents.indexOf(e.target.dataset.id));
   // console.log(cartContents);
   if (cartContents.indexOf(e.target.dataset.id) == -1) {
-    const response = await fetch('/images/' + imageID);
+    const response = await fetch('/bricks/' + brickID);
     if (response.ok) {
       const detail = await response.json();
       console.log(detail);
@@ -96,17 +96,17 @@ async function addToCart(e) {
   // if (e.target.nextSibling.value > 0) {
   // const img = document.createElement('img');
   // const shoppingCartDetails = document.createElement('p');
-  // const imageContainer = document.createElement('div');
+  // const brickContainer = document.createElement('div');
   // const dropDown = document.querySelector('#my_dropdown');
 
   // img.src = data.src;
   // img.id = data.id;
-  // imageContainer.append(img);
+  // brickContainer.append(img);
 
   // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
   // shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
-  // imageContainer.append(shoppingCartDetails);
-  // dropDown.append(imageContainer);
+  // brickContainer.append(shoppingCartDetails);
+  // dropDown.append(brickContainer);
   // }
 }
 const showCartButton = document.querySelector('.btn');
@@ -114,14 +114,14 @@ showCartButton.addEventListener('click', showCart);
 
 function getBricks(e) {
   clearCart();
-  const imageID = e.target.parentElement.firstChild.dataset.id;
+  const brickID = e.target.parentElement.firstChild.dataset.id;
   const dropDown = document.querySelector('#my_dropdown');
   const img = document.createElement('img');
   const shoppingCartDetails = document.createElement('p');
-  const cartImageContainer = document.createElement('div');
+  const cartbrickContainer = document.createElement('div');
   for (const brick of loadedBricks) {
     // console.log(brick.id);
-    if (brick.id == imageID) {
+    if (brick.id == brickID) {
       // attempting to get the bricks in cart to be unique
       console.log(cartContents.indexOf(brick.id));
       // console.log(brick);
@@ -129,13 +129,13 @@ function getBricks(e) {
       // console.log(e.target.nextSibling.value);
       img.id = brick.id;
       img.src = brick.src;
-      cartImageContainer.append(img);
+      cartbrickContainer.append(img);
 
       // have an array of id's with not just originals
       shoppingCartDetails.setAttribute('style', 'white-space: pre;');
       shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
-      cartImageContainer.append(shoppingCartDetails);
-      dropDown.append(cartImageContainer);
+      cartbrickContainer.append(shoppingCartDetails);
+      dropDown.append(cartbrickContainer);
     }
   }
 }
@@ -157,25 +157,25 @@ function showCart() {
 //   console.log(e.target, window.localStorage);
 // }
 
-async function loadImages() {
-  const response = await fetch('images');
-  let images;
+async function loadbricks() {
+  const response = await fetch('bricks');
+  let bricks;
   if (response.ok) {
-    images = await response.json();
+    bricks = await response.json();
   } else {
-    images = [{ src: 'failed to load images' }];
+    bricks = [{ src: 'failed to load bricks' }];
   }
-  showImages(images, el.legoImageSection);
+  showbricks(bricks, el.legobricksection);
   // prepareCart();
-  // change from showImages to showBricks
+  // change from showbricks to showBricks
 }
 
 function prepareHandles() {
-  el.legoImageSection = document.querySelector('#lego_image_section');
+  el.legobricksection = document.querySelector('#lego_brick_section');
 }
 
 function pageLoaded() {
-  loadImages();
+  loadbricks();
   prepareHandles();
 }
 
