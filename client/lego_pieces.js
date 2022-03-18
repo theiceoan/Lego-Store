@@ -60,12 +60,8 @@ function showBricks(bricks, where) {
 // const MyMap = new Map();
 // event listeners on buttons
 // get the id's of buttons and add them all to an array
-<<<<<<< HEAD
-// if the id in the array matches image.id then move object into local storage
-=======
 // if the id in the array matches brick.id then move object into local storage
 const brickIDS = [];
->>>>>>> feature-renaming
 
 // function prepareCart() {
 //   const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -79,27 +75,6 @@ const brickIDS = [];
 async function addToCart(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
-<<<<<<< HEAD
-  const response = await fetch('/images/' + imageID);
-  if (response.ok) {
-    console.log(response);
-    const detail = await response.json();
-    console.log(detail);
-    window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
-    // addToCart();
-    // const newObject = window.localStorage.getItem(e.target.dataset.id);
-    img.id = detail.id;
-    img.src = detail.src;
-
-    imageDetails.setAttribute('style', 'white-space: pre;');
-    imageDetails.textContent = `Name: ${detail.name}\r\nPrice: £${detail.price}`;
-
-    imageContainer.append(img);
-    imageContainer.append(imageDetails);
-    showCartButton.append(imageContainer);
-  } else {
-    console.log('failed to send message', response);
-=======
   // if the brick is in the basket, then we update the quantity and price
   // stop/return
   // console.log(cartContents.indexOf(e.target.dataset.id));
@@ -115,7 +90,6 @@ async function addToCart(e) {
     } else {
       console.log('failed to send message', response);
     }
->>>>>>> feature-renaming
   }
   // const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
 
@@ -181,20 +155,9 @@ function showCart() {
 //   console.log(e.target, window.localStorage);
 // }
 
-<<<<<<< HEAD
-// does this dataset id = that dataset id
-// count how many times that specific one has been put and then put that in cart
-// right now, the images in the shopping cart are not useful
-// should display the image, price, quantity
-
-async function loadImages() {
-  const response = await fetch('images');
-  let images;
-=======
 async function loadbricks() {
   const response = await fetch('bricks');
   let bricks;
->>>>>>> feature-renaming
   if (response.ok) {
     bricks = await response.json();
   } else {
@@ -205,12 +168,7 @@ async function loadbricks() {
 }
 
 function prepareHandles() {
-<<<<<<< HEAD
-  el.legoImageSection = document.querySelector('#lego_image_section');
-  document.querySelector('.btn').addEventListener('click', showCart);
-=======
   el.legobricksection = document.querySelector('#lego_brick_section');
->>>>>>> feature-renaming
 }
 
 function pageLoaded() {
