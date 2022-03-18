@@ -36,11 +36,11 @@ img {
 }
 
 
-#lego_image_section {
+#lego_brick_section {
   /* display: grid; */
 }
 
-.image_container {
+.brick_container {
   display: inline-block;
 }
 

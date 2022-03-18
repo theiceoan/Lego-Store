@@ -8,7 +8,7 @@ export const cartContents = [];
 // move bricks into server, create an API
 export const loadedBricks = [];
 
-function showbricks(bricks, where) {
+function showBricks(bricks, where) {
   for (const brick of bricks) {
     // bricks
     loadedBricks.push(brick);
@@ -165,9 +165,8 @@ async function loadbricks() {
   } else {
     bricks = [{ src: 'failed to load bricks' }];
   }
-  showbricks(bricks, el.legobricksection);
+  showBricks(bricks, el.legobricksection);
   // prepareCart();
-  // change from showbricks to showBricks
 }
 
 function prepareHandles() {
