@@ -1,22 +1,32 @@
+/* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 const el = {};
 window.localStorage.clear();
 
-function showImages(images, where) {
-  for (const image of images) {
-    // brick images
+export const cartContents = [];
+// put bricks in loadedBricks
+// move bricks into server, create an API
+export const loadedBricks = [];
+
+function showBricks(bricks, where) {
+  for (const brick of bricks) {
+    // bricks
+    loadedBricks.push(brick);
     const img = document.createElement('img');
-    const imageContainer = document.createElement('div');
-    imageContainer.setAttribute('class', 'image_container');
-    img.src = image.src;
-    img.dataset.name = image.name;
-    img.dataset.price = image.price;
-    img.dataset.id = image.id;
+    const brickContainer = document.createElement('div');
+    brickContainer.setAttribute('class', 'brick_container');
+    img.src = brick.src;
+    img.dataset.name = brick.name;
+    img.dataset.price = brick.price;
+    img.dataset.id = brick.id;
+
+    // brute force - delete everything in basket then repopulate
+    // if a brick is the same as a brick already in the basket, update the DOM
 
     // name and price
-    const imageDetails = document.createElement('p');
-    imageDetails.setAttribute('style', 'white-space: pre;');
-    imageDetails.textContent = `Name: ${image.name}\r\nPrice: £${image.price}`;
+    const shoppingCartDetails = document.createElement('p');
+    shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+    shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
@@ -36,38 +46,40 @@ function showImages(images, where) {
     addToCartButton.dataset.id = img.dataset.id;
 
 
-    imageContainer.append(img);
-    imageContainer.append(imageDetails);
-    imageContainer.append(addToCartButton);
-    imageContainer.append(numberDisplay);
-    where.append(imageContainer);
+    brickContainer.append(img);
+    brickContainer.append(shoppingCartDetails);
+    brickContainer.append(addToCartButton);
+    brickContainer.append(numberDisplay);
+    where.append(brickContainer);
 
-    addToCartButton.addEventListener('click', setUpCart);
-    // addToCartButton.addEventListener('click', addToCart);
+    addToCartButton.addEventListener('click', addToCart);
+    addToCartButton.addEventListener('click', getBricks);
   }
 }
 
 // const MyMap = new Map();
 // event listeners on buttons
 // get the id's of buttons and add them all to an array
+<<<<<<< HEAD
 // if the id in the array matches image.id then move object into local storage
+=======
+// if the id in the array matches brick.id then move object into local storage
+const brickIDS = [];
+>>>>>>> feature-renaming
 
 // function prepareCart() {
 //   const addToCartButtons = document.querySelectorAll('.add-to-cart');
 //   for (const button of addToCartButtons) {
 //     // function should be called add to cart
-//     button.addEventListener('click', setUpCart);
+//     button.addEventListener('click', addToCart);
 //   }
 // }
 
-async function setUpCart(e) {
-  const showCartButton = document.querySelector('#my_dropdown');
-  const img = document.createElement('img');
-  const imageContainer = document.createElement('div');
-  const imageDetails = document.createElement('p');
-
-  const imageID = e.target.parentElement.firstChild.dataset.id;
+// change name to addToCart
+async function addToCart(e) {
+  const brickID = e.target.parentElement.firstChild.dataset.id;
   // console.log(e.target);
+<<<<<<< HEAD
   const response = await fetch('/images/' + imageID);
   if (response.ok) {
     console.log(response);
@@ -87,10 +99,78 @@ async function setUpCart(e) {
     showCartButton.append(imageContainer);
   } else {
     console.log('failed to send message', response);
+=======
+  // if the brick is in the basket, then we update the quantity and price
+  // stop/return
+  // console.log(cartContents.indexOf(e.target.dataset.id));
+  // console.log(cartContents);
+  if (cartContents.indexOf(e.target.dataset.id) == -1) {
+    const response = await fetch('/bricks/' + brickID);
+    if (response.ok) {
+      const detail = await response.json();
+      console.log(detail);
+      // window.localStorage.setItem(e.target.dataset.id, JSON.stringify(detail));
+      cartContents.push(e.target.dataset.id);
+      // console.log(cartContents);
+    } else {
+      console.log('failed to send message', response);
+    }
+>>>>>>> feature-renaming
+  }
+  // const data = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
+
+  // if (e.target.nextSibling.value > 0) {
+  // const img = document.createElement('img');
+  // const shoppingCartDetails = document.createElement('p');
+  // const brickContainer = document.createElement('div');
+  // const dropDown = document.querySelector('#my_dropdown');
+
+  // img.src = data.src;
+  // img.id = data.id;
+  // brickContainer.append(img);
+
+  // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+  // shoppingCartDetails.textContent = `Name: ${0}\r\nPrice: £${0}`;
+  // brickContainer.append(shoppingCartDetails);
+  // dropDown.append(brickContainer);
+  // }
+}
+
+function getBricks(e) {
+  clearCart();
+  const brickID = e.target.parentElement.firstChild.dataset.id;
+  const dropDown = document.querySelector('#my_dropdown');
+  const img = document.createElement('img');
+  const shoppingCartDetails = document.createElement('p');
+  const cartbrickContainer = document.createElement('div');
+  for (const brick of loadedBricks) {
+    // console.log(brick.id);
+    if (brick.id == brickID) {
+      // attempting to get the bricks in cart to be unique
+      console.log(cartContents.indexOf(brick.id));
+      // console.log(brick);
+      brick.count = Number(brick.count) + Number(e.target.nextSibling.value);
+      // console.log(e.target.nextSibling.value);
+      img.id = brick.id;
+      img.src = brick.src;
+      cartbrickContainer.append(img);
+
+      // have an array of id's with not just originals
+      shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+      shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
+      cartbrickContainer.append(shoppingCartDetails);
+      dropDown.append(cartbrickContainer);
+    }
   }
 }
 
+function clearCart() {
+  const dropDown = document.querySelector('#my_dropdown');
+  dropDown.innerHTML = '';
+}
+
 function showCart() {
+  // console.log(window.localStorage);
   document.querySelector('#my_dropdown').classList.toggle('show');
 }
 
@@ -101,6 +181,7 @@ function showCart() {
 //   console.log(e.target, window.localStorage);
 // }
 
+<<<<<<< HEAD
 // does this dataset id = that dataset id
 // count how many times that specific one has been put and then put that in cart
 // right now, the images in the shopping cart are not useful
@@ -109,22 +190,31 @@ function showCart() {
 async function loadImages() {
   const response = await fetch('images');
   let images;
+=======
+async function loadbricks() {
+  const response = await fetch('bricks');
+  let bricks;
+>>>>>>> feature-renaming
   if (response.ok) {
-    images = await response.json();
+    bricks = await response.json();
   } else {
-    images = [{ src: 'failed to load images' }];
+    bricks = [{ src: 'failed to load bricks' }];
   }
-  showImages(images, el.legoImageSection);
+  showBricks(bricks, el.legobricksection);
   // prepareCart();
 }
 
 function prepareHandles() {
+<<<<<<< HEAD
   el.legoImageSection = document.querySelector('#lego_image_section');
   document.querySelector('.btn').addEventListener('click', showCart);
+=======
+  el.legobricksection = document.querySelector('#lego_brick_section');
+>>>>>>> feature-renaming
 }
 
 function pageLoaded() {
-  loadImages();
+  loadbricks();
   prepareHandles();
 }
 

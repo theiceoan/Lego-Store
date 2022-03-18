@@ -33,7 +33,16 @@ img {
   box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset;
 }
 
+<<<<<<< HEAD
 .image_container {
+=======
+
+#lego_brick_section {
+  /* display: grid; */
+}
+
+.brick_container {
+>>>>>>> feature-renaming
   display: inline-block;
 }
 
