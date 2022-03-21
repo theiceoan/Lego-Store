@@ -1,8 +1,9 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
-import { addToCart } from './shopping-cart.mjs';
+import { addToLocalStorage } from './shopping-cart.mjs';
 import { cartContents } from './shopping-cart.mjs';
+// import { addToCart } from './shopping-cart.mjs';
 
 const el = {};
 window.localStorage.clear();
@@ -55,8 +56,9 @@ function showBricks(bricks, where) {
     brickContainer.append(numberDisplay);
     where.append(brickContainer);
 
-    addToCartButton.addEventListener('click', addToCart);
+    addToCartButton.addEventListener('click', addToLocalStorage);
     addToCartButton.addEventListener('click', getBricks);
+    // addToCartButton.addEventListener('click', addToCart);
   }
 }
 
@@ -66,29 +68,23 @@ function showBricks(bricks, where) {
 // if the id in the array matches brick.id then move object into local storage
 const brickIDS = [];
 
-// function prepareCart() {
-//   const addToCartButtons = document.querySelectorAll('.add-to-cart');
-//   for (const button of addToCartButtons) {
-//     // function should be called add to cart
-//     button.addEventListener('click', addToCart);
-//   }
-// }
-
 function getBricks(e) {
-  clearCart();
+  // clearCart();
   const brickID = e.target.parentElement.firstChild.dataset.id;
   const dropDown = document.querySelector('#my_dropdown');
   const img = document.createElement('img');
   const shoppingCartDetails = document.createElement('p');
   const cartbrickContainer = document.createElement('div');
-  for (const brick of loadedBricks) {
-    // console.log(brick.id);
+  const bricks = Object.keys(window.localStorage);
+  for (const brick of bricks) {
+    console.log(brick.id);
     if (brick.id == brickID) {
       // attempting to get the bricks in cart to be unique
       console.log(cartContents.indexOf(brick.id));
-      // console.log(brick);
+      console.log(brick);
       brick.count = Number(brick.count) + Number(e.target.nextSibling.value);
-      // console.log(e.target.nextSibling.value);
+      console.log(brick.count);
+      console.log(e.target.nextSibling.value);
       img.id = brick.id;
       img.src = brick.src;
       cartbrickContainer.append(img);
@@ -102,22 +98,15 @@ function getBricks(e) {
   }
 }
 
-function clearCart() {
-  const dropDown = document.querySelector('#my_dropdown');
-  dropDown.innerHTML = '';
-}
+// function clearCart() {
+  // const dropDown = document.querySelector('#my_dropdown');
+  // dropDown.innerHTML = '';
+// }
 
 function showCart() {
   // console.log(window.localStorage);
   document.querySelector('#my_dropdown').classList.toggle('show');
 }
-
-// function addToCart(e) {
-//   const totalCount = document.querySelector('.total-count');
-
-//   const storedBrick = window.localStorage.getItem(e.target.dataset.id);
-//   console.log(e.target, window.localStorage);
-// }
 
 async function loadbricks() {
   const response = await fetch('bricks');
@@ -133,6 +122,8 @@ async function loadbricks() {
 
 function prepareHandles() {
   el.legobricksection = document.querySelector('#lego_brick_section');
+  const viewCartButton = document.querySelector('.btn-primary');
+  viewCartButton.addEventListener('click', showCart);
 }
 
 function pageLoaded() {
