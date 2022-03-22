@@ -4,13 +4,8 @@ export const dummyIDs = [];
 
 export async function addToLocalStorage(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
-  // console.log(e.target);
-  // if the brick is in the basket, then we update the quantity and price
-  // stop/return
-  // console.log(cartContents.indexOf(e.target.dataset.id));
-  // console.log(cartContents);
   const response = await fetch('/bricks/' + brickID);
-  if (response.ok) {
+  if (response.ok && e.target.nextSibling.value > 0) {
     const rawDetails = await response.json();
 
     cartContents.push(rawDetails);
@@ -41,10 +36,10 @@ export async function addToLocalStorage(e) {
         for (const description of shoppingCartDetails) {
           // console.log(description.dataset.id);
           if (description.dataset.id == brickID) {
+            cartBrick.count = Number(cartBrick.count) + Number(e.target.nextSibling.value);
             description.textContent = `Name: ${cartBrick.name}\r\nPrice: £${cartBrick.price * cartBrick.count}\r\nQuantity: ${Number(cartBrick.count) + Number(e.target.nextSibling.value)}`;
           }
         }
-        cartBrick.count = Number(cartBrick.count) + Number(e.target.nextSibling.value);
       }
     }
   } else {
