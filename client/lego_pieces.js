@@ -71,36 +71,46 @@ const brickIDS = [];
 function getBricks(e) {
   // clearCart();
   const brickID = e.target.parentElement.firstChild.dataset.id;
-  const dropDown = document.querySelector('#my_dropdown');
-  const img = document.createElement('img');
-  const shoppingCartDetails = document.createElement('p');
-  const cartbrickContainer = document.createElement('div');
-  const bricks = Object.keys(window.localStorage);
-  for (const brick of bricks) {
-    console.log(brick.id);
-    if (brick.id == brickID) {
-      // attempting to get the bricks in cart to be unique
-      console.log(cartContents.indexOf(brick.id));
-      console.log(brick);
-      brick.count = Number(brick.count) + Number(e.target.nextSibling.value);
-      console.log(brick.count);
-      console.log(e.target.nextSibling.value);
-      img.id = brick.id;
-      img.src = brick.src;
-      cartbrickContainer.append(img);
+  // const dropDown = document.querySelector('#my_dropdown');
+  // const img = document.createElement('img');
+  // const shoppingCartDetails = document.createElement('p');
+  // const cartbrickContainer = document.createElement('div');
 
-      // have an array of id's with not just originals
-      shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-      shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
-      cartbrickContainer.append(shoppingCartDetails);
-      dropDown.append(cartbrickContainer);
-    }
-  }
+  // const brick = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
+  // console.log(brick);
+  // img.id = brick.id;
+  // img.src = brick.src;
+  // cartbrickContainer.append(img);
+
+  // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+  // shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
+  // cartbrickContainer.append(shoppingCartDetails);
+  // dropDown.append(cartbrickContainer);
+  // for (const brick of loadedBricks) {
+  // console.log(brick.id);
+  // if (brick.id == brickID) {
+  // attempting to get the bricks in cart to be unique
+  // console.log(cartContents.indexOf(brick.id));
+  // console.log(brick);
+  // brick.count = Number(brick.count) + Number(e.target.nextSibling.value);
+  // console.log(brick.count);
+  // console.log(e.target.nextSibling.value);
+  // img.id = brick.id;
+  // img.src = brick.src;
+  // cartbrickContainer.append(img);
+
+  // have an array of id's with not just originals
+  // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
+  // shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
+  // cartbrickContainer.append(shoppingCartDetails);
+  // dropDown.append(cartbrickContainer);
+// }
+// }
 }
 
 // function clearCart() {
-  // const dropDown = document.querySelector('#my_dropdown');
-  // dropDown.innerHTML = '';
+// const dropDown = document.querySelector('#my_dropdown');
+// dropDown.innerHTML = '';
 // }
 
 function showCart() {
