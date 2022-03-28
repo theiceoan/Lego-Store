@@ -57,7 +57,7 @@ function showBricks(bricks, where) {
     where.append(brickContainer);
 
     addToCartButton.addEventListener('click', arrayOfBricks);
-    addToCartButton.addEventListener('click', getBricks);
+    // addToCartButton.addEventListener('click', addToBasket);
     // addToCartButton.addEventListener('click', addToCart);
   }
 }
