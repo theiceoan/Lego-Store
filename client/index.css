@@ -79,3 +79,7 @@ div {
 .dropdown_content p:hover {background-color: #ddd}
 
 .show {display:block;}
+
+#checkout {
+  display: none;
+}

@@ -1,8 +1,8 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
-import { addToLocalStorage } from './shopping-cart.mjs';
-import { cartContents } from './shopping-cart.mjs';
+import { arrayOfBricks } from './shopping-cart.mjs';
+// import { cartContents } from './shopping-cart.mjs';
 // import { addToCart } from './shopping-cart.mjs';
 
 const el = {};
@@ -28,9 +28,9 @@ function showBricks(bricks, where) {
     // if a brick is the same as a brick already in the basket, update the DOM
 
     // name and price
-    const shoppingCartDetails = document.createElement('p');
-    shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-    shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
+    const brickDetails = document.createElement('p');
+    brickDetails.setAttribute('style', 'white-space: pre;');
+    brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
@@ -51,12 +51,12 @@ function showBricks(bricks, where) {
 
 
     brickContainer.append(img);
-    brickContainer.append(shoppingCartDetails);
+    brickContainer.append(brickDetails);
     brickContainer.append(addToCartButton);
     brickContainer.append(numberDisplay);
     where.append(brickContainer);
 
-    addToCartButton.addEventListener('click', addToLocalStorage);
+    addToCartButton.addEventListener('click', arrayOfBricks);
     addToCartButton.addEventListener('click', getBricks);
     // addToCartButton.addEventListener('click', addToCart);
   }
@@ -73,7 +73,7 @@ function getBricks(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
   // const dropDown = document.querySelector('#my_dropdown');
   // const img = document.createElement('img');
-  // const shoppingCartDetails = document.createElement('p');
+  // const brickDetails = document.createElement('p');
   // const cartbrickContainer = document.createElement('div');
 
   // const brick = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
@@ -82,9 +82,9 @@ function getBricks(e) {
   // img.src = brick.src;
   // cartbrickContainer.append(img);
 
-  // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-  // shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
-  // cartbrickContainer.append(shoppingCartDetails);
+  // brickDetails.setAttribute('style', 'white-space: pre;');
+  // brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
+  // cartbrickContainer.append brickDetails);
   // dropDown.append(cartbrickContainer);
   // for (const brick of loadedBricks) {
   // console.log(brick.id);
@@ -100,9 +100,9 @@ function getBricks(e) {
   // cartbrickContainer.append(img);
 
   // have an array of id's with not just originals
-  // shoppingCartDetails.setAttribute('style', 'white-space: pre;');
-  // shoppingCartDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
-  // cartbrickContainer.append(shoppingCartDetails);
+  // brickDetails.setAttribute('style', 'white-space: pre;');
+  // brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
+  // cartbrickContainer.append brickDetails);
   // dropDown.append(cartbrickContainer);
 // }
 // }
@@ -116,6 +116,7 @@ function getBricks(e) {
 function showCart() {
   // console.log(window.localStorage);
   document.querySelector('#my_dropdown').classList.toggle('show');
+  document.querySelector('#checkout').classList.toggle('show');
 }
 
 async function loadbricks() {
