@@ -18,5 +18,5 @@ export async function arrayOfBricks(e) {
 }
 
 function addToLocalStorage() {
-  window.localStorage.setItem('basket', cartContents);
+  window.localStorage.setItem('basket', JSON.stringify(cartContents));
 }
