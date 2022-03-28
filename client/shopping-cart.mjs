@@ -6,10 +6,11 @@ export const dummyIDs = [];
 export async function arrayOfBricks(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
   const response = await fetch('/bricks/' + brickID);
-  if (response.ok && e.target.nextSibling.value > 0) {
+  if (response.ok && e.target.nextSibling.value > 0 && dummyIDs.indexOf(brickID) == -1) {
     const rawDetails = await response.json();
 
     cartContents.push(rawDetails);
+    dummyIDs.push(rawDetails.id);
     addToLocalStorage();
     console.log(cartContents);
   } else {
