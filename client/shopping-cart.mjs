@@ -35,6 +35,7 @@ export async function arrayOfBricks(e) {
     console.log('failed to send message', response);
   }
   addToBasket();
+  cartTally();
 }
 
 function addToBasket() {
@@ -53,5 +54,16 @@ function addToBasket() {
     brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
     cartbrickContainer.append(brickDetails);
     dropDown.append(cartbrickContainer);
+  }
+}
+
+function cartTally() {
+  const cartCounter = document.querySelector('.total-count');
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+
+  let brickTally = 0;
+  for (const storedBrick of storedBricks) {
+    brickTally += storedBrick.count;
+    cartCounter.textContent = brickTally;
   }
 }
