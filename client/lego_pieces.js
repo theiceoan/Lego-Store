@@ -62,57 +62,6 @@ function showBricks(bricks, where) {
   }
 }
 
-// const MyMap = new Map();
-// event listeners on buttons
-// get the id's of buttons and add them all to an array
-// if the id in the array matches brick.id then move object into local storage
-const brickIDS = [];
-
-function getBricks(e) {
-  // clearCart();
-  const brickID = e.target.parentElement.firstChild.dataset.id;
-  // const dropDown = document.querySelector('#my_dropdown');
-  // const img = document.createElement('img');
-  // const brickDetails = document.createElement('p');
-  // const cartbrickContainer = document.createElement('div');
-
-  // const brick = JSON.parse(window.localStorage.getItem(e.target.dataset.id));
-  // console.log(brick);
-  // img.id = brick.id;
-  // img.src = brick.src;
-  // cartbrickContainer.append(img);
-
-  // brickDetails.setAttribute('style', 'white-space: pre;');
-  // brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
-  // cartbrickContainer.append brickDetails);
-  // dropDown.append(cartbrickContainer);
-  // for (const brick of loadedBricks) {
-  // console.log(brick.id);
-  // if (brick.id == brickID) {
-  // attempting to get the bricks in cart to be unique
-  // console.log(cartContents.indexOf(brick.id));
-  // console.log(brick);
-  // brick.count = Number(brick.count) + Number(e.target.nextSibling.value);
-  // console.log(brick.count);
-  // console.log(e.target.nextSibling.value);
-  // img.id = brick.id;
-  // img.src = brick.src;
-  // cartbrickContainer.append(img);
-
-  // have an array of id's with not just originals
-  // brickDetails.setAttribute('style', 'white-space: pre;');
-  // brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price * brick.count}\r\nQuantity: ${brick.count}`;
-  // cartbrickContainer.append brickDetails);
-  // dropDown.append(cartbrickContainer);
-// }
-// }
-}
-
-// function clearCart() {
-// const dropDown = document.querySelector('#my_dropdown');
-// dropDown.innerHTML = '';
-// }
-
 function showCart() {
   // console.log(window.localStorage);
   document.querySelector('#my_dropdown').classList.toggle('show');
