@@ -34,27 +34,8 @@ export async function arrayOfBricks(e) {
   } else {
     console.log('failed to send message', response);
   }
-  addToBasket();
+  // addToBasket();
   cartTally();
-}
-
-function addToBasket() {
-  const dropDown = document.querySelector('#my_dropdown');
-  dropDown.textContent = '';
-  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-  for (const storedBrick of storedBricks) {
-    const img = document.createElement('img');
-    const brickDetails = document.createElement('p');
-    const cartbrickContainer = document.createElement('div');
-    // console.log(storedBrick);
-    img.id = storedBrick.id;
-    img.src = storedBrick.src;
-    cartbrickContainer.append(img);
-    brickDetails.setAttribute('style', 'white-space: pre;');
-    brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
-    cartbrickContainer.append(brickDetails);
-    dropDown.append(cartbrickContainer);
-  }
 }
 
 function cartTally() {

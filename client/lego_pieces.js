@@ -62,11 +62,10 @@ function showBricks(bricks, where) {
   }
 }
 
-function showCart() {
-  // console.log(window.localStorage);
-  document.querySelector('#my_dropdown').classList.toggle('show');
-  document.querySelector('#checkout').classList.toggle('show');
-}
+// function showCart() {
+  // document.querySelector('#my_dropdown').classList.toggle('show');
+  // document.querySelector('#checkout').classList.toggle('show');
+// }
 
 async function loadbricks() {
   const response = await fetch('bricks');
@@ -82,8 +81,8 @@ async function loadbricks() {
 
 function prepareHandles() {
   el.legobricksection = document.querySelector('#lego_brick_section');
-  const viewCartButton = document.querySelector('.btn-primary');
-  viewCartButton.addEventListener('click', showCart);
+  // const viewCartButton = document.querySelector('.btn-primary');
+  // viewCartButton.addEventListener('click', showCart);
 }
 
 function pageLoaded() {
