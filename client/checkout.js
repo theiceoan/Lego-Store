@@ -4,7 +4,9 @@ import { cartContents } from './shopping-cart.mjs';
 console.log(cartContents);
 
 function createBasket() {
-  const legoSection = document.querySelector('#lego_brick_section');
+  const legoSection = document.querySelector('#t1');
+  const checkoutBricks = document.querySelector('#checkout-bricks');
+  console.log(legoSection, checkoutBricks);
   //   legoSection.textContent = '';
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   for (const storedBrick of storedBricks) {
@@ -45,10 +47,12 @@ function showCart() {
   const template1 = document.querySelector('#t1');
   const legoSection = document.querySelector('#lego_brick_section');
   const cloned = template1.content.cloneNode(true);
+  console.log(cloned)
   //   console.log(template1);
-  const updateThis = cloned.querySelector('#lego_brick_section');
-  updateThis.append(legoSection);
-  document.body.textContent = '';
+  // const updateThis = cloned.querySelector('#lego_brick_section');
+  // console.log(updateThis);
+  legoSection.textContent = '';
+  // updateThis.append(legoSection);
   document.body.append(cloned);
 }
 
