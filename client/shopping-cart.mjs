@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable eqeqeq */
+// adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/4/client/index.js
 export const cartContents = [];
 export const dummyIDs = [];
 // const cartPriceTotal = [];
