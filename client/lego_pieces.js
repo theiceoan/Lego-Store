@@ -1,4 +1,4 @@
-/* eslint-disable import/no-duplicates */
+/* eslint-disable no-undef */
 /* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 import { arrayOfBricks } from './shopping-cart.mjs';
@@ -6,7 +6,7 @@ import { arrayOfBricks } from './shopping-cart.mjs';
 // import { addToCart } from './shopping-cart.mjs';
 
 const el = {};
-window.localStorage.clear();
+// window.localStorage.clear();
 
 // put bricks in loadedBricks
 // move bricks into server, create an API
@@ -62,11 +62,10 @@ function showBricks(bricks, where) {
   }
 }
 
-function showCart() {
-  // console.log(window.localStorage);
-  document.querySelector('#my_dropdown').classList.toggle('show');
-  document.querySelector('#checkout').classList.toggle('show');
-}
+// function showCart() {
+// document.querySelector('#my_dropdown').classList.toggle('show');
+// document.querySelector('#checkout').classList.toggle('show');
+// }
 
 async function loadbricks() {
   const response = await fetch('bricks');
@@ -82,8 +81,8 @@ async function loadbricks() {
 
 function prepareHandles() {
   el.legobricksection = document.querySelector('#lego_brick_section');
-  const viewCartButton = document.querySelector('.btn-primary');
-  viewCartButton.addEventListener('click', showCart);
+  // const viewCartButton = document.querySelector('.btn-primary');
+  // viewCartButton.addEventListener('click', showCart);
 }
 
 function pageLoaded() {

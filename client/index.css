@@ -83,3 +83,19 @@ div {
 #checkout {
   display: none;
 }
+
+.brick-details {
+  float: right;
+  padding: 0em 0em 0em 1em;
+  font-size: 1.5em;
+}
+
+.input_details {
+  float: left;
+}
+
+#checkout {
+  font-size: 2em;
+  display: block;
+  float: right;
+}

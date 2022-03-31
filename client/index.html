@@ -6,6 +6,7 @@
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js" async defer></script>
     <script type="module" src="index.js" async defer></script>
     <script type="module" src="lego_pieces.js" async defer></script>
+    <script type="module" src="checkout.js" async defer></script>
     <meta charset="UTF-8">
     <link rel="icon" href="data:,"><!-- prevent favicon requests -->
 </head>
@@ -18,12 +19,8 @@
     <a href="shopping_page.html" id="shopping_page">SHOP</a>
     <!-- <a href="shopping_bag.html" id="shopping_bag"><img src="images/shopping_bag.jpg" alt="shopping bag" style="width: 5em; height: 5em;"></a> -->
     <div class="dropdown_cart">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</button>
-        <button class="clear-cart btn btn-danger">Clear Cart</button>
+        <a href="checkout.html" class="btn btn-primary"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart">Cart (<span class="total-count"></span>)</button></a>
         <div id="my_dropdown" class="dropdown_content">
-
-        </div>
-        <div id="checkout">
 
         </div>
     </div>
@@ -31,3 +28,4 @@
     <section id="lego_brick_section">
 
     </section>
+</body>

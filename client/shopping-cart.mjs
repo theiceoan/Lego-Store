@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable eqeqeq */
+// adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/4/client/index.js
 export const cartContents = [];
 export const dummyIDs = [];
 // const cartPriceTotal = [];
@@ -34,24 +36,17 @@ export async function arrayOfBricks(e) {
   } else {
     console.log('failed to send message', response);
   }
-  addToBasket();
+  // addToBasket();
+  cartTally();
 }
 
-function addToBasket() {
-  const dropDown = document.querySelector('#my_dropdown');
-  dropDown.textContent = '';
+function cartTally() {
+  const cartCounter = document.querySelector('.total-count');
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+
+  let brickTally = 0;
   for (const storedBrick of storedBricks) {
-    const img = document.createElement('img');
-    const brickDetails = document.createElement('p');
-    const cartbrickContainer = document.createElement('div');
-    // console.log(storedBrick);
-    img.id = storedBrick.id;
-    img.src = storedBrick.src;
-    cartbrickContainer.append(img);
-    brickDetails.setAttribute('style', 'white-space: pre;');
-    brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
-    cartbrickContainer.append(brickDetails);
-    dropDown.append(cartbrickContainer);
+    brickTally += storedBrick.count;
+    cartCounter.textContent = brickTally;
   }
 }
