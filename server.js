@@ -1,4 +1,4 @@
-// Adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/3/svr.js
+// Adapted from https://github.com/portsoc/staged-simple-message-board
 import express from 'express';
 import path from 'path';
 import url from 'url';
@@ -16,12 +16,12 @@ app.get('/auth-config', (req, res) => {
   res.json(authConfig);
 });
 
-function getBricks(req, res) {
-  res.json(sl.listBricks());
+async function getBricks(req, res) {
+  res.json(await sl.listBricks());
 }
 
-function getBrick(req, res) {
-  const result = sl.findBrick(req.params.id);
+async function getBrick(req, res) {
+  const result = await sl.findBrick(req.params.id);
   if (!result) {
     res.status(404).send('No match for that ID');
     return;
@@ -29,8 +29,15 @@ function getBrick(req, res) {
   res.json(result);
 }
 
-app.get('/bricks', getBricks);
-app.get('/bricks/:id', getBrick);
+function asyncWrap(f) {
+  return (req, res, next) => {
+    Promise.resolve(f(req, res, next))
+      .catch((e) => next(e || new Error()));
+  };
+}
+
+app.get('/bricks', asyncWrap(getBricks));
+app.get('/bricks/:id', asyncWrap(getBrick));
 
 // app.post('/bricks', express.json(), (req, res) => {
 
