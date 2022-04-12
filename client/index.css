@@ -60,7 +60,9 @@ div {
 }
 
 aside {
-  position: fixed;
+  position: sticky;
+  top: 0px;
+  background-color: black;
 }
 
 .btn:hover, .btn:focus {
