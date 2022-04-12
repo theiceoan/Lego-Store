@@ -18,7 +18,8 @@ function showBricks(bricks, where) {
     loadedBricks.push(brick);
     const img = document.createElement('img');
     const brickContainer = document.createElement('div');
-    brickContainer.setAttribute('class', 'brick_container');
+    // brickContainer.setAttribute('class', 'brick-container');
+    brickContainer.classList.add('brick-container');
     img.src = brick.src;
     img.dataset.name = brick.name;
     img.dataset.price = brick.price;
@@ -30,13 +31,14 @@ function showBricks(bricks, where) {
     // name and price
     const brickDetails = document.createElement('p');
     brickDetails.classList.add('all-brick-details');
-    brickDetails.setAttribute('style', 'white-space: pre;');
+    // brickDetails.setAttribute('style', 'white-space: pre;');
     brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
     numberDisplay.step = 5;
-    numberDisplay.setAttribute('class', 'input_display');
+    // numberDisplay.setAttribute('class', 'input-display');
+    numberDisplay.classList.add('input-display');
     numberDisplay.value = 0;
     numberDisplay.type = 'number';
     numberDisplay.min = '0';
@@ -45,7 +47,8 @@ function showBricks(bricks, where) {
     // name and id dataset items
     const addToCartButton = document.createElement('button');
     addToCartButton.textContent = 'Add to Cart';
-    addToCartButton.setAttribute('class', 'add-to-cart');
+    // addToCartButton.setAttribute('class', 'add-to-cart');
+    addToCartButton.classList.add('add-to-cart');
     addToCartButton.dataset.name = img.dataset.name;
     addToCartButton.dataset.price = img.dataset.price;
     addToCartButton.dataset.id = img.dataset.id;
@@ -64,7 +67,7 @@ function showBricks(bricks, where) {
 }
 
 // function showCart() {
-// document.querySelector('#my_dropdown').classList.toggle('show');
+// document.querySelector('#my-dropdown').classList.toggle('show');
 // document.querySelector('#checkout').classList.toggle('show');
 // }
 
@@ -81,7 +84,7 @@ async function loadbricks() {
 }
 
 function prepareHandles() {
-  el.legobricksection = document.querySelector('#lego_brick_section');
+  el.legobricksection = document.querySelector('#lego-brick-section');
   // const viewCartButton = document.querySelector('.btn-primary');
   // viewCartButton.addEventListener('click', showCart);
 }

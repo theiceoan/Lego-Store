@@ -3,7 +3,7 @@ const cartContents = [];
 
 function createBasket() {
 //   console.log('hello world');
-  const legoSection = document.querySelector('#lego_brick_section');
+  const legoSection = document.querySelector('#lego-brick-section');
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   console.log(storedBricks);
 
@@ -19,20 +19,22 @@ function createBasket() {
     img.src = storedBrick.src;
     cartbrickContainer.append(img);
 
-    brickDetails.setAttribute('style', 'white-space: pre;');
+    // brickDetails.setAttribute('style', 'white-space: pre;');
     brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
     cartbrickContainer.append(brickDetails);
 
     const numberDisplay = document.createElement('input');
     numberDisplay.step = 5;
-    numberDisplay.setAttribute('class', 'input_display');
+    // numberDisplay.setAttribute('class', 'input-display');
+    numberDisplay.classList.add('input-display');
     numberDisplay.value = 0;
     numberDisplay.type = 'number';
     numberDisplay.min = '0';
 
     const addToCartButton = document.createElement('button');
     addToCartButton.textContent = 'Add to Cart';
-    addToCartButton.setAttribute('class', 'add-to-cart');
+    // addToCartButton.setAttribute('class', 'add-to-cart');
+    addToCartButton.classList.add('add-to-cart');
     addToCartButton.dataset.id = img.id;
 
     legoSection.append(cartbrickContainer);
@@ -58,7 +60,7 @@ function updateBasket(e) {
 }
 
 function endCheckout() {
-  const legoSection = document.querySelector('#lego_brick_section');
+  const legoSection = document.querySelector('#lego-brick-section');
   const checkoutButton = document.querySelector('#checkout');
 
   legoSection.textContent = '';
