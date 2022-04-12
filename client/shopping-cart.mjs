@@ -10,6 +10,8 @@ export async function arrayOfBricks(e) {
   const response = await fetch('/bricks/' + brickID);
   if (response.ok) {
     const rawDetails = await response.json();
+    // brickids is supposed to replace dummyids in the indexof but not working atm
+    const brickids = window.localStorage.getItem('brickids');
     // console.log(rawDetails.count);
     // rawDetails.count = Number(e.target.nextSibling.value);
 
@@ -18,6 +20,7 @@ export async function arrayOfBricks(e) {
       // console.log(rawDetails);
       cartContents.push(rawDetails);
       dummyIDs.push(rawDetails.id);
+      window.localStorage.setItem('brickids', dummyIDs);
 
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
     } else if (dummyIDs.indexOf(rawDetails.id) != -1 && e.target.nextSibling.value > 0) {
