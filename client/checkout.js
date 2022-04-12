@@ -66,7 +66,7 @@ function endCheckout() {
   window.localStorage.clear();
 
   const goodbyeMessage = document.createElement('p');
-  goodbyeMessage.classList.add = 'goodbye-message';
+  goodbyeMessage.setAttribute('style', 'font-size: 5em');
   goodbyeMessage.textContent = 'Thank You for Shopping with Ice! Confirmation will be Sent to your Email Address';
   legoSection.append(goodbyeMessage);
 

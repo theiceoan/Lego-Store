@@ -29,6 +29,7 @@ function showBricks(bricks, where) {
 
     // name and price
     const brickDetails = document.createElement('p');
+    brickDetails.classList.add('all-brick-details');
     brickDetails.setAttribute('style', 'white-space: pre;');
     brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
 
