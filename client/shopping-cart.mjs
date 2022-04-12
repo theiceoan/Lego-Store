@@ -5,7 +5,7 @@ export const cartContents = [];
 export const dummyIDs = [];
 // const cartPriceTotal = [];
 
-export async function arrayOfBricks(e) {
+export async function addToLocalStorage(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
   const response = await fetch('/bricks/' + brickID);
   if (response.ok) {

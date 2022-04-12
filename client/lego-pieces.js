@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
-import { arrayOfBricks } from './shopping-cart.mjs';
+import { addToLocalStorage } from './shopping-cart.mjs';
 // import { cartContents } from './shopping-cart.mjs';
 // import { addToCart } from './shopping-cart.mjs';
 
@@ -18,26 +18,20 @@ function showBricks(bricks, where) {
     loadedBricks.push(brick);
     const img = document.createElement('img');
     const brickContainer = document.createElement('div');
-    // brickContainer.setAttribute('class', 'brick-container');
     brickContainer.classList.add('brick-container');
     img.src = brick.src;
     img.dataset.name = brick.name;
     img.dataset.price = brick.price;
     img.dataset.id = brick.id;
 
-    // brute force - delete everything in basket then repopulate
-    // if a brick is the same as a brick already in the basket, update the DOM
-
     // name and price
     const brickDetails = document.createElement('p');
     brickDetails.classList.add('all-brick-details');
-    // brickDetails.setAttribute('style', 'white-space: pre;');
     brickDetails.textContent = `Name: ${brick.name}\r\nPrice: £${brick.price}`;
 
     // displaying input box for quantity of lego pieces user may want to buy
     const numberDisplay = document.createElement('input');
     numberDisplay.step = 5;
-    // numberDisplay.setAttribute('class', 'input-display');
     numberDisplay.classList.add('input-display');
     numberDisplay.value = 0;
     numberDisplay.type = 'number';
@@ -47,7 +41,6 @@ function showBricks(bricks, where) {
     // name and id dataset items
     const addToCartButton = document.createElement('button');
     addToCartButton.textContent = 'Add to Cart';
-    // addToCartButton.setAttribute('class', 'add-to-cart');
     addToCartButton.classList.add('add-to-cart');
     addToCartButton.dataset.name = img.dataset.name;
     addToCartButton.dataset.price = img.dataset.price;
@@ -60,7 +53,7 @@ function showBricks(bricks, where) {
     brickContainer.append(numberDisplay);
     where.append(brickContainer);
 
-    addToCartButton.addEventListener('click', arrayOfBricks);
+    addToCartButton.addEventListener('click', addToLocalStorage);
     // addToCartButton.addEventListener('click', addToBasket);
     // addToCartButton.addEventListener('click', addToCart);
   }
@@ -89,13 +82,7 @@ function prepareHandles() {
   // viewCartButton.addEventListener('click', showCart);
 }
 
-function pageLoaded() {
+export function pageLoaded() {
   loadbricks();
   prepareHandles();
 }
-
-window.addEventListener('load', pageLoaded);
-
-
-// array, map or an object
-// preference to map
