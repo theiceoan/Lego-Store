@@ -47,6 +47,20 @@ div {
   font-size: 16px;
   border: none;
   cursor: pointer;
+  /* position: fixed; */
+}
+
+.btn {
+  /* position: fixed; */
+  right: 5em;
+}
+
+#login {
+  /* position: fixed; */
+}
+
+aside {
+  position: fixed;
 }
 
 .btn:hover, .btn:focus {
