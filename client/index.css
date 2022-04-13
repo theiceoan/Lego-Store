@@ -97,6 +97,10 @@ aside {
   white-space: pre;
 }
 
+.all-brick-details {
+  white-space: pre;
+}
+
 .input_details {
   float: left;
 }
@@ -133,7 +137,8 @@ aside {
   .brick-details {
     float: right;
     padding: 0em 0em 0em 1em;
-    font-size: 2em;
+    font-size: 3em;
+    white-space: pre;
   }
 
   #title {

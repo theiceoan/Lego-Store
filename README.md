@@ -14,12 +14,7 @@
 
 ## questions
 
-* consistency with casing and naming
-* no adding decimals
-* going to cart only possible if there is something in local storage
-* cart, login and logout button should stay on page as user scrolls
 * only 10 bricks should be loaded at a time
 * style goodbye message after the click so setAttribute isn't used there
 * references of where i got the bricks from
-* auth0 code shouldn't be in index.js
-* modularisation (only one script in html then the rest should make use of imports)
+* only one media query
