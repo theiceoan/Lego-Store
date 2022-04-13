@@ -17,5 +17,4 @@
 * only 10 bricks should be loaded at a time
 * style goodbye message after the click so setAttribute isn't used there
 * references of where i got the bricks from
-* bricks aren't aligning properly in cart
 * only one media query
