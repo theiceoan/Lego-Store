@@ -50,7 +50,24 @@ function createBasket() {
     legoSection.append(numberDisplay);
 
     addToCartButton.addEventListener('click', updateBasket);
+    addToCartButton.addEventListener('click', cartTotalPrice);
   }
+}
+
+function cartTotalPrice() {
+  const legoSection = document.querySelector('#lego-brick-section');
+  const totalPriceElement = document.createElement('p');
+  totalPriceElement.remove();
+  totalPriceElement.id = 'total-price';
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+  let totalPrice = 0;
+
+  for (const storedBrick of storedBricks) {
+    totalPrice += (storedBrick.price * storedBrick.count);
+    totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
+  }
+  console.log(totalPriceElement);
+  legoSection.append(totalPriceElement);
 }
 
 function basketEmpty() {
@@ -71,7 +88,7 @@ function updateBasket(e) {
   for (const storedBrick of cartContents) {
     if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0) {
       // console.log(cartContents);
-      storedBrick.count = Number(storedBrick.count) + Number(e.target.nextSibling.value);
+      storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       // console.log(storedBrick.count);
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
@@ -112,3 +129,4 @@ document.querySelector('#checkout').addEventListener('click', endCheckout);
 
 window.addEventListener('load', createBasket);
 window.addEventListener('load', basketEmpty);
+window.addEventListener('load', cartTotalPrice);

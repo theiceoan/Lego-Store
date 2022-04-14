@@ -199,6 +199,9 @@ span {
   /* margin: 2em; */
 }
 
+#total-price {
+  font-size: 5em;
+}
 /* span:hover { */
   /* box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset; */
 /* } */
