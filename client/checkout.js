@@ -5,7 +5,7 @@ function createBasket() {
 //   console.log('hello world');
   const legoSection = document.querySelector('#lego-brick-section');
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-  console.log(storedBricks);
+  // console.log(storedBricks);
 
   for (const storedBrick of storedBricks) {
     cartContents.push(storedBrick);
@@ -14,6 +14,14 @@ function createBasket() {
     const brickDetails = document.createElement('p');
     brickDetails.classList.add('brick-details');
     const cartbrickContainer = document.createElement('div');
+
+    // icon to remove brick
+    const removeBrickIcon = document.createElement('span');
+    removeBrickIcon.classList.add = 'remove-brick-icon';
+    removeBrickIcon.textContent = 'x';
+    removeBrickIcon.addEventListener('click', removeBrick);
+    cartbrickContainer.append(removeBrickIcon);
+
     // console.log(storedBrick);
     img.id = storedBrick.id;
     img.src = storedBrick.src;
@@ -42,12 +50,29 @@ function createBasket() {
     legoSection.append(numberDisplay);
 
     addToCartButton.addEventListener('click', updateBasket);
+    addToCartButton.addEventListener('click', cartTotalPrice);
   }
+}
+
+function cartTotalPrice() {
+  const legoSection = document.querySelector('#lego-brick-section');
+  const totalPriceElement = document.createElement('p');
+  totalPriceElement.remove();
+  totalPriceElement.id = 'total-price';
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+  let totalPrice = 0;
+
+  for (const storedBrick of storedBricks) {
+    totalPrice += (storedBrick.price * storedBrick.count);
+    totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
+  }
+  console.log(totalPriceElement);
+  legoSection.append(totalPriceElement);
 }
 
 function basketEmpty() {
   const legoSection = document.querySelector('#lego-brick-section');
-  console.log(legoSection);
+  // console.log(legoSection);
   if (legoSection.children.length == 0) {
     legoSection.textContent = 'Cart Empty:( Go Back and add an item';
     legoSection.setAttribute('style', 'font-size: 5em');
@@ -63,12 +88,23 @@ function updateBasket(e) {
   for (const storedBrick of cartContents) {
     if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0) {
       // console.log(cartContents);
-      storedBrick.count = Number(storedBrick.count) + Number(e.target.nextSibling.value);
+      storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       // console.log(storedBrick.count);
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
     }
   }
+}
+
+// adapted from https://gist.github.com/scottopolis/6e35cf0d53bae81e6161662e6374da04
+function removeBrick(e) {
+  console.log(e.target.nextSibling.id);
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+
+  const removeIndex = storedBricks.findIndex(item => item.id == e.target.nextSibling.id);
+  storedBricks.splice(removeIndex, 1);
+  window.localStorage.setItem('basket', JSON.stringify(storedBricks));
+  window.location.reload();
 }
 
 function endCheckout() {
@@ -93,3 +129,4 @@ document.querySelector('#checkout').addEventListener('click', endCheckout);
 
 window.addEventListener('load', createBasket);
 window.addEventListener('load', basketEmpty);
+window.addEventListener('load', cartTotalPrice);

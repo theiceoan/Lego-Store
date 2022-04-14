@@ -18,3 +18,5 @@
 * style goodbye message after the click so setAttribute isn't used there
 * references of where i got the bricks from
 * only one media query
+* total price at bottom of checkout
+* fix the cart brick counter
