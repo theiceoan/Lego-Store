@@ -5,7 +5,7 @@ function createBasket() {
 //   console.log('hello world');
   const legoSection = document.querySelector('#lego-brick-section');
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-  console.log(storedBricks);
+  // console.log(storedBricks);
 
   for (const storedBrick of storedBricks) {
     cartContents.push(storedBrick);
@@ -17,6 +17,7 @@ function createBasket() {
 
     // icon to remove brick
     const removeBrickIcon = document.createElement('span');
+    removeBrickIcon.classList.add = 'remove-brick-icon';
     removeBrickIcon.textContent = 'x';
     removeBrickIcon.addEventListener('click', removeBrick);
     cartbrickContainer.append(removeBrickIcon);
@@ -54,7 +55,7 @@ function createBasket() {
 
 function basketEmpty() {
   const legoSection = document.querySelector('#lego-brick-section');
-  console.log(legoSection);
+  // console.log(legoSection);
   if (legoSection.children.length == 0) {
     legoSection.textContent = 'Cart Empty:( Go Back and add an item';
     legoSection.setAttribute('style', 'font-size: 5em');
@@ -86,6 +87,7 @@ function removeBrick(e) {
   const removeIndex = storedBricks.findIndex(item => item.id == e.target.nextSibling.id);
   storedBricks.splice(removeIndex, 1);
   window.localStorage.setItem('basket', JSON.stringify(storedBricks));
+  window.location.reload();
 }
 
 function endCheckout() {
@@ -104,11 +106,6 @@ function endCheckout() {
   setTimeout(function () {
     window.location.href = 'http://localhost:8080/';
   }, 5000);
-}
-
-const removeBrickIcons = document.querySelectorAll('span');
-for (const removeBrickIcon of removeBrickIcons) {
-  removeBrickIcon.addEventListener('click', createBasket);
 }
 
 document.querySelector('#checkout').addEventListener('click', endCheckout);
