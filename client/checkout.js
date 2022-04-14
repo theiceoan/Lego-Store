@@ -45,6 +45,18 @@ function createBasket() {
   }
 }
 
+function basketEmpty() {
+  const legoSection = document.querySelector('#lego-brick-section');
+  console.log(legoSection);
+  if (legoSection.children.length == 0) {
+    legoSection.textContent = 'Cart Empty:( Go Back and add an item';
+    legoSection.setAttribute('style', 'font-size: 5em');
+    console.log('hello world');
+    const checkoutButton = document.querySelector('#checkout');
+    checkoutButton.disabled = true;
+  }
+}
+
 function updateBasket(e) {
   const brickDetails = e.target.previousSibling.lastChild;
   // const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
@@ -80,3 +92,4 @@ function endCheckout() {
 document.querySelector('#checkout').addEventListener('click', endCheckout);
 
 window.addEventListener('load', createBasket);
+window.addEventListener('load', basketEmpty);
