@@ -14,6 +14,13 @@ function createBasket() {
     const brickDetails = document.createElement('p');
     brickDetails.classList.add('brick-details');
     const cartbrickContainer = document.createElement('div');
+
+    // icon to remove brick
+    const removeBrickIcon = document.createElement('span');
+    removeBrickIcon.textContent = 'x';
+    removeBrickIcon.addEventListener('click', removeBrick);
+    cartbrickContainer.append(removeBrickIcon);
+
     // console.log(storedBrick);
     img.id = storedBrick.id;
     img.src = storedBrick.src;
@@ -71,6 +78,16 @@ function updateBasket(e) {
   }
 }
 
+// adapted from https://gist.github.com/scottopolis/6e35cf0d53bae81e6161662e6374da04
+function removeBrick(e) {
+  console.log(e.target.nextSibling.id);
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+
+  const removeIndex = storedBricks.findIndex(item => item.id == e.target.nextSibling.id);
+  storedBricks.splice(removeIndex, 1);
+  window.localStorage.setItem('basket', JSON.stringify(storedBricks));
+}
+
 function endCheckout() {
   const legoSection = document.querySelector('#lego-brick-section');
   const checkoutButton = document.querySelector('#checkout');
@@ -87,6 +104,11 @@ function endCheckout() {
   setTimeout(function () {
     window.location.href = 'http://localhost:8080/';
   }, 5000);
+}
+
+const removeBrickIcons = document.querySelectorAll('span');
+for (const removeBrickIcon of removeBrickIcons) {
+  removeBrickIcon.addEventListener('click', createBasket);
 }
 
 document.querySelector('#checkout').addEventListener('click', endCheckout);
