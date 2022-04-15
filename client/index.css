@@ -210,6 +210,11 @@ span:hover {
   box-shadow: 0.5em 0.5em 0.5em rgb(203, 4, 4) inset;
 }
 
+.total-count {
+  font-size: 1em;
+  position: initial;
+}
+
 
 /* 50 em */
 /* 35 em */

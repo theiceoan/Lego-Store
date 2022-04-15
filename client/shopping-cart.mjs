@@ -3,7 +3,7 @@
 // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/4/client/index.js
 export const cartContents = [];
 export const dummyIDs = [];
-const cartItemQuantity = [];
+// const cartItemQuantity = [];
 
 export async function addToLocalStorage(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
@@ -16,7 +16,7 @@ export async function addToLocalStorage(e) {
     // rawDetails.count = Number(e.target.nextSibling.value);
     if (brickids == null) {
       rawDetails.count = Number(e.target.nextSibling.value);
-      cartItemQuantity.push(rawDetails.count);
+      // cartItemQuantity.push(rawDetails.count);
       dummyIDs.push(rawDetails.id);
       window.localStorage.setItem('brickids', dummyIDs);
 
@@ -26,20 +26,21 @@ export async function addToLocalStorage(e) {
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
       // console.log('hello world');
     } else if (brickids.indexOf(rawDetails.id) == -1 && e.target.nextSibling.value > 0) {
+      const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
       rawDetails.count = Number(e.target.nextSibling.value);
       // console.log(rawDetails);
-      cartContents.push(rawDetails);
+      storedBricks.push(rawDetails);
       dummyIDs.push(rawDetails.id);
       window.localStorage.setItem('brickids', dummyIDs);
 
-      window.localStorage.setItem('basket', JSON.stringify(cartContents));
+      window.localStorage.setItem('basket', JSON.stringify(storedBricks));
     } else if (brickids.indexOf(rawDetails.id) != -1 && e.target.nextSibling.value > 0) {
       // console.log('hello ice');
-      // const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-      for (const storedBrick of cartContents) {
+      const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+      for (const storedBrick of storedBricks) {
         if (storedBrick.id == rawDetails.id) {
           storedBrick.count = Number(storedBrick.count) + Number(e.target.nextSibling.value);
-          window.localStorage.setItem('basket', JSON.stringify(cartContents));
+          window.localStorage.setItem('basket', JSON.stringify(storedBricks));
           // console.log(storedBrick.count);
         }
         console.log(storedBrick.count);
@@ -50,7 +51,7 @@ export async function addToLocalStorage(e) {
     console.log('failed to send message', response);
   }
   // addToBasket();
-  // cartTally();
+  cartTally();
 }
 
 // function cartTally() {
@@ -65,21 +66,22 @@ export async function addToLocalStorage(e) {
 // }
 //
 
-// function cartTally() {
-// let brickTally = 0;
-// const cartCounter = document.querySelector('.total-count');
-// const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-//
-// if (storedBricks == null) {
-// console.log('hello world');
-// cartCounter.textContent = 0;
-// } else {
-// for (const storedBrick of storedBricks) {
-// brickTally += storedBrick.count;
-// cartCounter.textContent = brickTally;
-// }
-// }
-// }
-//
-// window.addEventListener('load', cartTally);
+function cartTally() {
+  let brickTally = 0;
+  const cartCounter = document.querySelector('.total-count');
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+
+  if (storedBricks == null) {
+    console.log('hello world');
+    cartCounter.textContent = 0;
+  } else {
+    for (const storedBrick of storedBricks) {
+      brickTally += storedBrick.count;
+      cartCounter.textContent = brickTally;
+    }
+  }
+}
+
+window.addEventListener('load', cartTally);
+
 //
