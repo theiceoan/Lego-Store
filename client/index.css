@@ -170,6 +170,10 @@ aside {
     display: block;
     float: right;
   }
+
+  #total-price {
+    font-size: 5em;
+  }
 }
 
 @media(max-width:70em) {
@@ -200,11 +204,11 @@ span {
 }
 
 #total-price {
-  font-size: 5em;
+  font-size: 3em;
 }
-/* span:hover { */
-  /* box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset; */
-/* } */
+span:hover {
+  box-shadow: 0.5em 0.5em 0.5em rgb(203, 4, 4) inset;
+}
 
 
 /* 50 em */

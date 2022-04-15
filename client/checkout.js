@@ -50,15 +50,26 @@ function createBasket() {
     legoSection.append(numberDisplay);
 
     addToCartButton.addEventListener('click', updateBasket);
-    addToCartButton.addEventListener('click', cartTotalPrice);
+    addToCartButton.addEventListener('click', editTotalPrice);
   }
 }
 
-function cartTotalPrice() {
-  const legoSection = document.querySelector('#lego-brick-section');
+function showTotalPrice() {
   const totalPriceElement = document.createElement('p');
-  totalPriceElement.remove();
   totalPriceElement.id = 'total-price';
+  const legoSection = document.querySelector('#lego-brick-section');
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+
+  let totalPrice = 0;
+  for (const storedBrick of storedBricks) {
+    totalPrice += (storedBrick.price * storedBrick.count);
+    totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
+  }
+  legoSection.append(totalPriceElement);
+}
+
+function editTotalPrice() {
+  const totalPriceElement = document.querySelector('#total-price');
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   let totalPrice = 0;
 
@@ -67,7 +78,6 @@ function cartTotalPrice() {
     totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
   }
   console.log(totalPriceElement);
-  legoSection.append(totalPriceElement);
 }
 
 function basketEmpty() {
@@ -129,4 +139,4 @@ document.querySelector('#checkout').addEventListener('click', endCheckout);
 
 window.addEventListener('load', createBasket);
 window.addEventListener('load', basketEmpty);
-window.addEventListener('load', cartTotalPrice);
+window.addEventListener('load', showTotalPrice);
