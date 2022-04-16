@@ -54,9 +54,15 @@ function showBricks(bricks, where) {
     where.append(brickContainer);
 
     addToCartButton.addEventListener('click', addToLocalStorage);
+    img.addEventListener('click', viewDescription);
     // addToCartButton.addEventListener('click', addToBasket);
     // addToCartButton.addEventListener('click', addToCart);
   }
+}
+
+function viewDescription(e) {
+  const id = e.target.dataset.id;
+  window.location = `details.html?brk=${id}`;
 }
 
 // function showCart() {
