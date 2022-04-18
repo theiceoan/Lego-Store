@@ -2,34 +2,37 @@
 
 const el = {};
 
-function showBrick(brick) {
-  el.brick.value = brick.stock;
-}
-
 function getBrickIds() {
-  console.log(window.localStorage.getItem('basket'));
-  return (window.localStorage.getItem('basket'));
+  // console.log(window.localStorage.getItem('basket'));
+  return window.localStorage.getItem('basket');
 }
 
 /** Use fetch to put a JSON message to the server */
 async function sendBrick() {
-  const id = getBrickIds();
-  console.log(id);
-  const payload = { id, stock: el.stock.value };
-  console.log('Payload', payload);
+  // const id = getBrickIds();
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+  for (const storedBrick of storedBricks) {
+    // console.log(storedBrick.id);
+    const id = storedBrick.id;
+    const payload = { id, stock: storedBrick.stock };
+    console.log('Payload', payload);
 
-  const response = await fetch(`bricks/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  });
-
-  if (response.ok) {
-    el.brick.value = '';
-    const updatedBricks = await response.json();
-    showBrick(updatedBricks);
-  } else {
-    console.log('failed to send message', response);
+    const response = await fetch(`bricks/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    // console.log(response.method);
+    if (response.ok) {
+      // console.log(el.stock);
+      // el.stock = '';
+      console.log('hello world');
+      // const updatedBricks = await response.json();
+      // console.log(updatedBricks);
+      // showBrick(updatedBricks);
+    } else {
+      console.log('failed to send message', response);
+    }
   }
 }
 
@@ -38,7 +41,7 @@ async function sendBrick() {
    * setup here for convenience.
    */
 function prepareHandles() {
-//   el.message = document.querySelector('#message');
+  el.brickList = document.querySelector('#lego-brick-section');
   el.checkout = document.querySelector('#checkout');
 }
 

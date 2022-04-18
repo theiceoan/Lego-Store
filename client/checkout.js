@@ -104,6 +104,7 @@ function updateBasket(e) {
     if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0) {
       // console.log(cartContents);
       storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
+      storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       // console.log(storedBrick.count);
       window.localStorage.setItem('basket', JSON.stringify(cartContents));

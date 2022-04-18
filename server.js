@@ -31,6 +31,7 @@ async function getBrick(req, res) {
 
 async function putBrick(req, res) {
   const brick = await sl.editBrickQuantity(req.body);
+  // console.log(brick, req.body);
   res.json(brick);
 }
 
