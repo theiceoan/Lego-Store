@@ -29,6 +29,11 @@ async function getBrick(req, res) {
   res.json(result);
 }
 
+async function putBrick(req, res) {
+  const brick = await sl.editBrickQuantity(req.body);
+  res.json(brick);
+}
+
 function asyncWrap(f) {
   return (req, res, next) => {
     Promise.resolve(f(req, res, next))
@@ -38,6 +43,7 @@ function asyncWrap(f) {
 
 app.get('/bricks', asyncWrap(getBricks));
 app.get('/bricks/:id', asyncWrap(getBrick));
+app.put('/bricks/:id', express.json(), asyncWrap(putBrick));
 
 // app.post('/bricks', express.json(), (req, res) => {
 
