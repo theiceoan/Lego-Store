@@ -126,6 +126,17 @@ aside {
     height: 25em;
     /* padding: 0em 2em 0em 2em; */
     box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset;
+    -webkit-transform: scale(1);
+	  transform: scale(1);
+	  -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+
+  img:hover {
+    /* box-shadow: 0.5em 0.5em 1em rgb(149, 7, 237); */
+    /* background-color: black; */
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
   }
 
   .all-brick-details {
@@ -176,10 +187,6 @@ aside {
   }
 }
 
-@media(max-width:70em) {
-  
-}
-
 /* span { */
   /* display: inline-block; */
   /* text-align: right; */
@@ -206,13 +213,26 @@ span {
 #total-price {
   font-size: 3em;
 }
-span:hover {
-  box-shadow: 0.5em 0.5em 0.5em rgb(203, 4, 4) inset;
-}
+/* span:hover { */
+  /* box-shadow: 0.5em 0.5em 0.5em rgb(203, 4, 4) inset; */
+/* } */
 
 .total-count {
   font-size: 1em;
   position: initial;
+}
+
+#brick-name, h2 {
+  font-size: 2em;
+  color: rgb(149, 7, 237);
+  display: grid;
+  padding-bottom: 1em;
+  text-decoration: underline;
+}
+
+#brick-price, #brick-description {
+  font-size: 2em;
+  color: rgb(149, 7, 237);
 }
 
 

@@ -1,13 +1,14 @@
 async function showBrick() {
   let brickid = window.location.search;
-  console.log(brickid);
+  // console.log(brickid);
   brickid = brickid.slice(1);
   brickid = brickid.split('=');
   brickid = brickid[1];
-  console.log(brickid);
+  // console.log(brickid);
 
-  const response = await fetch(`/api/brick?id${brickid}`);
+  const response = await fetch(`bricks/${brickid}`);
   const brickDetails = await response.json();
+  console.log(brickDetails);
   const legoSection = document.querySelector('#lego-brick-section');
   const brickName = document.querySelector('#brick-name');
   brickName.textContent = brickDetails.name;
@@ -21,11 +22,11 @@ async function showBrick() {
 
   const brickPrice = document.createElement('p');
   brickPrice.id = 'brick-price';
-  brickPrice.textContent = `£${brickDetails.price}`;
+  brickPrice.textContent = `Price: £${brickDetails.price}`;
 
   const brickDescription = document.createElement('p');
   brickDescription.id = 'brick-description';
-  brickDescription.textContent = brickDescription.description;
+  brickDescription.textContent = `Description: ${brickDetails.description}`;
 
   brickContainer.append(img);
   brickContainer.append(brickPrice);
