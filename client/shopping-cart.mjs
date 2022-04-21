@@ -16,6 +16,7 @@ export async function addToLocalStorage(e) {
     // rawDetails.count = Number(e.target.nextSibling.value);
     if (brickids == null) {
       rawDetails.count = Number(e.target.nextSibling.value);
+      rawDetails.stock = Number(rawDetails.stock) - Number(rawDetails.count);
       // cartItemQuantity.push(rawDetails.count);
       dummyIDs.push(rawDetails.id);
       window.localStorage.setItem('brickids', dummyIDs);
@@ -28,6 +29,7 @@ export async function addToLocalStorage(e) {
     } else if (brickids.indexOf(rawDetails.id) == -1 && e.target.nextSibling.value > 0) {
       const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
       rawDetails.count = Number(e.target.nextSibling.value);
+      rawDetails.stock = Number(rawDetails.stock) - Number(rawDetails.count);
       // console.log(rawDetails);
       storedBricks.push(rawDetails);
       dummyIDs.push(rawDetails.id);
@@ -40,6 +42,7 @@ export async function addToLocalStorage(e) {
       for (const storedBrick of storedBricks) {
         if (storedBrick.id == rawDetails.id) {
           storedBrick.count = Number(storedBrick.count) + Number(e.target.nextSibling.value);
+          storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
           window.localStorage.setItem('basket', JSON.stringify(storedBricks));
           // console.log(storedBrick.count);
         }
