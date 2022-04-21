@@ -38,6 +38,7 @@ export async function editBrickQuantity(updatedBrick) {
 
   const id = updatedBrick.id;
   const name = updatedBrick.name;
+  // console.log(updatedBrick.name);
   const price = updatedBrick.price;
   const stock = updatedBrick.stock;
   const count = 0;

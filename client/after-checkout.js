@@ -14,7 +14,7 @@ async function sendBrick() {
   for (const storedBrick of storedBricks) {
     // console.log(storedBrick.id);
     const id = storedBrick.id;
-    const payload = { id, stock: storedBrick.stock };
+    const payload = { id, name: storedBrick.name, price: storedBrick.price, src: storedBrick.src, description: storedBrick.description, stock: storedBrick.stock };
     console.log('Payload', payload);
 
     const response = await fetch(`bricks/${id}`, {
