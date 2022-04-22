@@ -137,7 +137,7 @@ function endCheckout() {
   legoSection.append(goodbyeMessage);
 
   // setTimeout(function () {
-    // window.location.href = 'http://localhost:8080/';
+  // window.location.href = 'http://localhost:8080/';
   // }, 5000);
 }
 
