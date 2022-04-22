@@ -32,3 +32,22 @@ export async function findBrick(id) {
   const db = await dbConn;
   return db.get('SELECT * FROM Bricks WHERE id = ?', id);
 }
+
+export async function editBrickQuantity(updatedBrick) {
+  const db = await dbConn;
+
+  const id = updatedBrick.id;
+  const name = updatedBrick.name;
+  // console.log(updatedBrick.name);
+  const price = updatedBrick.price;
+  const stock = updatedBrick.stock;
+  const count = 0;
+  const src = updatedBrick.src;
+  const description = updatedBrick.description;
+
+  const statement = await db.run('UPDATE Bricks SET name = ? , price = ? , stock = ? , count = ? , src = ? , description = ? WHERE id = ?', [name, price, stock, count, src, description, id]);
+
+  if (statement.changes === 0) throw new Error('brick not found');
+
+  return findBrick(id);
+}
