@@ -7,57 +7,58 @@ function removeContentFrom(what) {
 }
 
 function createBasket() {
-//   console.log('hello world');
-  const legoSection = document.querySelector('#lego-brick-section');
-  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-  // console.log(storedBricks);
-
-  for (const storedBrick of storedBricks) {
-    cartContents.push(storedBrick);
-
-    const img = document.createElement('img');
-    const brickDetails = document.createElement('p');
-    brickDetails.classList.add('brick-details');
-    const cartbrickContainer = document.createElement('div');
-
-    // icon to remove brick
-    const removeBrickIcon = document.createElement('span');
-    removeBrickIcon.classList.add = 'remove-brick-icon';
-    removeBrickIcon.textContent = 'x';
-    removeBrickIcon.addEventListener('click', removeBrick);
-    cartbrickContainer.append(removeBrickIcon);
-
-    // console.log(storedBrick);
-    img.id = storedBrick.id;
-    img.src = storedBrick.src;
-    cartbrickContainer.append(img);
-
-    // brickDetails.setAttribute('style', 'white-space: pre;');
-    brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
-    cartbrickContainer.append(brickDetails);
-
-    const numberDisplay = document.createElement('input');
-    numberDisplay.step = 5;
-    // numberDisplay.setAttribute('class', 'input-display');
-    numberDisplay.classList.add('input-display');
-    numberDisplay.value = 0;
-    numberDisplay.type = 'number';
-    numberDisplay.min = '0';
-
-    const addToCartButton = document.createElement('button');
-    addToCartButton.textContent = 'Add to Cart';
-    // addToCartButton.setAttribute('class', 'add-to-cart');
-    addToCartButton.classList.add('add-to-cart');
-    addToCartButton.dataset.id = img.id;
-
-    legoSection.append(cartbrickContainer);
-    legoSection.append(addToCartButton);
-    legoSection.append(numberDisplay);
-
-    addToCartButton.addEventListener('click', updateBasket);
-    addToCartButton.addEventListener('click', editTotalPrice);
+  //   console.log('hello world');
+    const legoSection = document.querySelector('#lego-brick-section');
+    const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+    // console.log(storedBricks);
+  
+    for (const storedBrick of storedBricks) {
+      cartContents.push(storedBrick);
+  
+      const img = document.createElement('img');
+      const brickDetails = document.createElement('p');
+      brickDetails.classList.add('brick-details');
+      const cartbrickContainer = document.createElement('div');
+      cartbrickContainer.className = 'checkout-content';
+  
+      // icon to remove brick
+      const removeBrickIcon = document.createElement('span');
+      removeBrickIcon.classList.add = 'remove-brick-icon';
+      removeBrickIcon.textContent = 'x';
+      removeBrickIcon.addEventListener('click', removeBrick);
+      cartbrickContainer.append(removeBrickIcon);
+  
+      // console.log(storedBrick);
+      img.id = storedBrick.id;
+      img.src = storedBrick.src;
+      cartbrickContainer.append(img);
+  
+      // brickDetails.setAttribute('style', 'white-space: pre;');
+      brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBri
+      cartbrickContainer.append(brickDetails);
+  
+      const numberDisplay = document.createElement('input');
+      numberDisplay.step = 5;
+      // numberDisplay.setAttribute('class', 'input-display');
+      numberDisplay.className = 'input-display checkout-content';
+      numberDisplay.value = 0;
+      numberDisplay.type = 'number';
+      numberDisplay.min = '0';
+  
+      const addToCartButton = document.createElement('button');
+      addToCartButton.textContent = 'Add to Cart';
+      // addToCartButton.setAttribute('class', 'add-to-cart');
+      addToCartButton.className = 'add-to-cart checkout-content';
+      addToCartButton.dataset.id = img.id;
+  
+      legoSection.append(cartbrickContainer);
+      legoSection.append(addToCartButton);
+      legoSection.append(numberDisplay);
+  
+      addToCartButton.addEventListener('click', updateBasket);
+      addToCartButton.addEventListener('click', editTotalPrice);
+    }
   }
-}
 
 function showTotalPrice() {
   const totalPriceElement = document.createElement('p');
@@ -136,7 +137,7 @@ function endCheckout() {
   }
 
   // setTimeout(function () {
-    // window.location.href = 'http://localhost:8080/';
+  // window.location.href = 'http://localhost:8080/';
   // }, 5000);
 }
 
