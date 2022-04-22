@@ -20,3 +20,4 @@
 * references of where i got the bricks from
 * only one media query
 * create server folder
+* redirect is a bad idea
