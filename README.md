@@ -12,10 +12,11 @@
 
 6. dummy id's needs to be in local storage too so it keeps the ting after refreshing
 
+7. checkout.js needs to be simplified
+
 ## questions
 
 * only 10 bricks should be loaded at a time
-* style goodbye message after the click so setAttribute isn't used there
 * references of where i got the bricks from
 * only one media query
 * create server folder

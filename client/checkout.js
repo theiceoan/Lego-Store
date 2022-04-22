@@ -1,5 +1,10 @@
 /* eslint-disable eqeqeq */
 const cartContents = [];
+const el = {};
+
+function removeContentFrom(what) {
+  what.textContent = '';
+}
 
 function createBasket() {
 //   console.log('hello world');
@@ -99,6 +104,7 @@ function updateBasket(e) {
     if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0) {
       // console.log(cartContents);
       storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
+      storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       // console.log(storedBrick.count);
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
@@ -123,7 +129,6 @@ function endCheckout() {
 
   legoSection.textContent = '';
   checkoutButton.remove();
-  window.localStorage.clear();
 
   const goodbyeMessage = document.createElement('p');
   goodbyeMessage.setAttribute('style', 'font-size: 5em');
