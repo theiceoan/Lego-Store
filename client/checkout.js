@@ -129,16 +129,15 @@ function endCheckout() {
 
   legoSection.textContent = '';
   checkoutButton.remove();
-  // window.localStorage.clear();
 
   const goodbyeMessage = document.createElement('p');
   goodbyeMessage.setAttribute('style', 'font-size: 5em');
   goodbyeMessage.textContent = 'Thank You for Shopping with Ice! Confirmation will be Sent to your Email Address';
   legoSection.append(goodbyeMessage);
 
-  // setTimeout(function () {
-    // window.location.href = 'http://localhost:8080/';
-  // }, 5000);
+  setTimeout(function () {
+    window.location.href = 'http://localhost:8080/';
+  }, 5000);
 }
 
 document.querySelector('#checkout').addEventListener('click', endCheckout);

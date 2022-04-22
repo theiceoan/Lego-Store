@@ -2,6 +2,7 @@
 /* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 import { addToLocalStorage } from './shopping-cart.mjs';
+// import { insufficientStockMessage } from './maintainStock.mjs';
 // import { cartContents } from './shopping-cart.mjs';
 // import { addToCart } from './shopping-cart.mjs';
 
@@ -54,6 +55,7 @@ function showBricks(bricks, where) {
     where.append(brickContainer);
 
     addToCartButton.addEventListener('click', addToLocalStorage);
+    // addToCartButton.addEventListener('click', insufficientStockMessage);
     img.addEventListener('click', viewDescription);
     // addToCartButton.addEventListener('click', addToBasket);
     // addToCartButton.addEventListener('click', addToCart);

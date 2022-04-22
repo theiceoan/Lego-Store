@@ -34,6 +34,7 @@ async function sendBrick() {
       console.log('failed to send message', response);
     }
   }
+  window.localStorage.clear();
 }
 
 /**

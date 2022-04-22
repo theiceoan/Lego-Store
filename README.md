@@ -1,16 +1,19 @@
 # To Do List
 
-1. fix the add bricks button
+1. add more bricks
 
-2. start working on linking the shopping cart to the bricks added
+2. set a limit so not all are loaded onto page at the same time
 
-3. add more bricks
+3. maintain an inventory
+   1. when the stock is less than total quantity available, don't allow purchase
 
-4. set a limit so not all are loaded onto page at the same time
+4. create a server folder
 
-5. stop from being able to add decimals
+5. grouping of event listeners
 
-6. dummy id's needs to be in local storage too so it keeps the ting after refreshing
+6. add comments to code
+
+7. top nav bar of mobile version is buggy
 
 ## questions
 
@@ -18,3 +21,4 @@
 * style goodbye message after the click so setAttribute isn't used there
 * references of where i got the bricks from
 * only one media query
+* how important are the bricks i have in the page atm (no colour)
