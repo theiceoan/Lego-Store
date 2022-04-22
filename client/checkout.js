@@ -8,35 +8,35 @@ function removeContentFrom(what) {
 
 function createBasket() {
   //   console.log('hello world');
-    const legoSection = document.querySelector('#lego-brick-section');
-    const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-    // console.log(storedBricks);
-  
+  const legoSection = document.querySelector('#lego-brick-section');
+  const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
+  // console.log(storedBricks);
+  if (storedBricks != null) {
     for (const storedBrick of storedBricks) {
       cartContents.push(storedBrick);
-  
+
       const img = document.createElement('img');
       const brickDetails = document.createElement('p');
       brickDetails.classList.add('brick-details');
       const cartbrickContainer = document.createElement('div');
       cartbrickContainer.className = 'checkout-content';
-  
+
       // icon to remove brick
       const removeBrickIcon = document.createElement('span');
       removeBrickIcon.classList.add = 'remove-brick-icon';
       removeBrickIcon.textContent = 'x';
       removeBrickIcon.addEventListener('click', removeBrick);
       cartbrickContainer.append(removeBrickIcon);
-  
+
       // console.log(storedBrick);
       img.id = storedBrick.id;
       img.src = storedBrick.src;
       cartbrickContainer.append(img);
-  
+
       // brickDetails.setAttribute('style', 'white-space: pre;');
-      brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBri
+      brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       cartbrickContainer.append(brickDetails);
-  
+
       const numberDisplay = document.createElement('input');
       numberDisplay.step = 5;
       // numberDisplay.setAttribute('class', 'input-display');
@@ -44,34 +44,38 @@ function createBasket() {
       numberDisplay.value = 0;
       numberDisplay.type = 'number';
       numberDisplay.min = '0';
-  
+
       const addToCartButton = document.createElement('button');
       addToCartButton.textContent = 'Add to Cart';
       // addToCartButton.setAttribute('class', 'add-to-cart');
       addToCartButton.className = 'add-to-cart checkout-content';
       addToCartButton.dataset.id = img.id;
-  
+
       legoSection.append(cartbrickContainer);
       legoSection.append(addToCartButton);
       legoSection.append(numberDisplay);
-  
+
       addToCartButton.addEventListener('click', updateBasket);
       addToCartButton.addEventListener('click', editTotalPrice);
     }
   }
+}
 
 function showTotalPrice() {
   const totalPriceElement = document.createElement('p');
   totalPriceElement.id = 'total-price';
+  totalPriceElement.className = 'checkout-content';
   const legoSection = document.querySelector('#lego-brick-section');
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
 
   let totalPrice = 0;
-  for (const storedBrick of storedBricks) {
-    totalPrice += (storedBrick.price * storedBrick.count);
-    totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
+  if (storedBricks != null) {
+    for (const storedBrick of storedBricks) {
+      totalPrice += (storedBrick.price * storedBrick.count);
+      totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
+    }
+    legoSection.append(totalPriceElement);
   }
-  legoSection.append(totalPriceElement);
 }
 
 function editTotalPrice() {
@@ -87,11 +91,12 @@ function editTotalPrice() {
 }
 
 function basketEmpty() {
-  const legoSection = document.querySelector('#lego-brick-section');
+  const checkoutElements = document.querySelector('.checkout-content');
+  const messageSection = document.querySelector('.goodbye-message');
   // console.log(legoSection);
-  if (legoSection.children.length == 0) {
-    legoSection.textContent = 'Cart Empty:( Go Back and add an item';
-    legoSection.setAttribute('style', 'font-size: 5em');
+  if (checkoutElements == null) {
+    messageSection.textContent = 'Cart Empty:( Go Back and add an item';
+    // messageSection.setAttribute('style', 'font-size: 5em');
     console.log('hello world');
     const checkoutButton = document.querySelector('#checkout');
     checkoutButton.disabled = true;
@@ -127,14 +132,16 @@ function removeBrick(e) {
 function endCheckout() {
   const checkoutContent = document.querySelectorAll('.checkout-content');
   const goodbyeMessage = document.querySelector('.goodbye-message');
+  const checkoutButton = document.querySelector('#checkout');
   // window.localStorage.clear();
 
   // goodbyeMessage.setAttribute('style', 'font-size: 5em');
-  goodbyeMessage.textContent = 'Thank You for Shopping with Ice! Confirmation will be sent to you email address';
   // legoSection.append(goodbyeMessage);
   for (const element of checkoutContent) {
     element.remove();
   }
+  checkoutButton.remove();
+  goodbyeMessage.textContent = 'Thank You for Shopping with Ice! Confirmation will be sent to you email address';
 
   // setTimeout(function () {
   // window.location.href = 'http://localhost:8080/';
