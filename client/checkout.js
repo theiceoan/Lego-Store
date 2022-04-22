@@ -124,20 +124,19 @@ function removeBrick(e) {
 }
 
 function endCheckout() {
-  const legoSection = document.querySelector('#lego-brick-section');
-  const checkoutButton = document.querySelector('#checkout');
-
-  legoSection.textContent = '';
-  checkoutButton.remove();
+  const checkoutContent = document.querySelectorAll('.checkout-content');
+  const goodbyeMessage = document.querySelector('.goodbye-message');
   // window.localStorage.clear();
 
-  const goodbyeMessage = document.createElement('p');
-  goodbyeMessage.setAttribute('style', 'font-size: 5em');
-  goodbyeMessage.textContent = 'Thank You for Shopping with Ice! Confirmation will be Sent to your Email Address';
-  legoSection.append(goodbyeMessage);
+  // goodbyeMessage.setAttribute('style', 'font-size: 5em');
+  goodbyeMessage.textContent = 'Thank You for Shopping with Ice! Confirmation will be sent to you email address';
+  // legoSection.append(goodbyeMessage);
+  for (const element of checkoutContent) {
+    element.remove();
+  }
 
   // setTimeout(function () {
-  // window.location.href = 'http://localhost:8080/';
+    // window.location.href = 'http://localhost:8080/';
   // }, 5000);
 }
 
