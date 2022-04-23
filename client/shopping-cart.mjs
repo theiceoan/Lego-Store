@@ -15,7 +15,7 @@ export async function addToLocalStorage(e) {
       const brickids = window.localStorage.getItem('brickids');
       // console.log(rawDetails.count);
       // rawDetails.count = Number(e.target.nextSibling.value);
-      if (brickids == null && rawDetails.stock > rawDetails.count) {
+      if (brickids == null && rawDetails.stock > e.target.nextSibling.value) {
         rawDetails.count = Number(e.target.nextSibling.value);
         rawDetails.stock = Number(rawDetails.stock) - Number(rawDetails.count);
         // cartItemQuantity.push(rawDetails.count);
@@ -27,7 +27,7 @@ export async function addToLocalStorage(e) {
         // window.localStorage.setItem('quantity', )
         window.localStorage.setItem('basket', JSON.stringify(cartContents));
       // console.log('hello world');
-      } else if (brickids.indexOf(rawDetails.id) == -1 && e.target.nextSibling.value > 0) {
+      } else if (brickids.indexOf(rawDetails.id) == -1 && e.target.nextSibling.value > 0 && rawDetails.stock > e.target.nextSibling.value) {
         const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
         rawDetails.count = Number(e.target.nextSibling.value);
         rawDetails.stock = Number(rawDetails.stock) - Number(rawDetails.count);
@@ -37,11 +37,11 @@ export async function addToLocalStorage(e) {
         window.localStorage.setItem('brickids', dummyIDs);
 
         window.localStorage.setItem('basket', JSON.stringify(storedBricks));
-      } else if (brickids.indexOf(rawDetails.id) != -1 && e.target.nextSibling.value > 0) {
+      } else if (brickids.indexOf(rawDetails.id) != -1 && e.target.nextSibling.value > 0 && rawDetails.stock > e.target.nextSibling.value) {
       // console.log('hello ice');
         const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
         for (const storedBrick of storedBricks) {
-          if (storedBrick.id == rawDetails.id && storedBrick.stock > e.target.nextSibling.value) {
+          if (storedBrick.id == rawDetails.id) {
             storedBrick.count = Number(storedBrick.count) + Number(e.target.nextSibling.value);
             storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
             window.localStorage.setItem('basket', JSON.stringify(storedBricks));
@@ -51,11 +51,7 @@ export async function addToLocalStorage(e) {
         }
       }
     } else {
-      window.confirm(`There is insufficient stock of the ${rawDetails.name} to process your order. Requested Quantity:${rawDetails.count}, Available Quantity: ${rawDetails.stock}. Please press OK if you would like to add all the available bricks to your shopping cart. Or, press Cancel.`);
-      if (window.confirm) {
-        rawDetails.count = rawDetails.stock;
-        window.localStorage.setItem('basket', JSON.stringify(storedBricks));
-      }
+      window.alert(`insufficient stock! Available stock: ${rawDetails.stock}`);
     }
     // console.log(cartContents);
   } else {

@@ -17,7 +17,8 @@ function createBasket() {
 
     const img = document.createElement('img');
     const brickDetails = document.createElement('p');
-    brickDetails.classList.add('brick-details');
+    const errorMessage = document.createElement('p');
+    brickDetails.className = 'brick-details';
     const cartbrickContainer = document.createElement('div');
 
     // icon to remove brick
@@ -82,7 +83,7 @@ function editTotalPrice() {
     totalPrice += (storedBrick.price * storedBrick.count);
     totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
   }
-  console.log(totalPriceElement);
+  // console.log(totalPriceElement);
 }
 
 function basketEmpty() {
@@ -101,13 +102,15 @@ function updateBasket(e) {
   const brickDetails = e.target.previousSibling.lastChild;
   // const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   for (const storedBrick of cartContents) {
-    if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0) {
+    if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0 && storedBrick.stock > e.target.nextSibling.value) {
       // console.log(cartContents);
       storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
       storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       // console.log(storedBrick.count);
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
+    } else if (storedBrick.id == e.target.dataset.id && storedBrick.stock < e.target.nextSibling.value) {
+      window.alert(`insufficient stock! Available stock: ${storedBrick.stock}`);
     }
   }
 }
