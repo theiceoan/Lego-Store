@@ -9,6 +9,8 @@ export async function addToLocalStorage(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
   const response = await fetch('/bricks/' + brickID);
   if (response.ok) {
+    const errorMessage = e.target.parentElement.firstChild.nextSibling;
+    errorMessage.textContent = '';
     const rawDetails = await response.json();
     if (rawDetails.stock > e.target.nextSibling.value) {
     // brickids is supposed to replace dummyids in the indexof but not working atm
@@ -41,17 +43,20 @@ export async function addToLocalStorage(e) {
       // console.log('hello ice');
         const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
         for (const storedBrick of storedBricks) {
-          if (storedBrick.id == rawDetails.id) {
+          if (storedBrick.id == rawDetails.id && storedBrick.stock >= e.target.nextSibling.value) {
             storedBrick.count = Number(storedBrick.count) + Number(e.target.nextSibling.value);
             storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
             window.localStorage.setItem('basket', JSON.stringify(storedBricks));
           // console.log(storedBrick.count);
+          } else {
+            errorMessage.textContent = `insufficient stock! Available stock: ${rawDetails.stock}`;
           }
           console.log(storedBrick.count);
         }
       }
     } else {
-      window.alert(`insufficient stock! Available stock: ${rawDetails.stock}`);
+      // window.alert(`insufficient stock! Available stock: ${rawDetails.stock}`);
+      errorMessage.textContent = `insufficient stock! Available stock: ${rawDetails.stock}`;
     }
     // console.log(cartContents);
   } else {

@@ -24,6 +24,8 @@ function showBricks(bricks, where) {
     img.dataset.name = brick.name;
     img.dataset.price = brick.price;
     img.dataset.id = brick.id;
+    const errorMessage = document.createElement('p');
+    errorMessage.className = 'error-message';
 
     // name and price
     const brickDetails = document.createElement('p');
@@ -49,6 +51,7 @@ function showBricks(bricks, where) {
 
 
     brickContainer.append(img);
+    brickContainer.append(errorMessage);
     brickContainer.append(brickDetails);
     brickContainer.append(addToCartButton);
     brickContainer.append(numberDisplay);

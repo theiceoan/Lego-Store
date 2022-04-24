@@ -185,6 +185,10 @@ aside {
   #total-price {
     font-size: 5em;
   }
+
+  .error-message {
+    font-size: 2em;
+  }
 }
 
 /* span { */
@@ -233,6 +237,13 @@ span {
 #brick-price, #brick-description {
   font-size: 2em;
   color: rgb(149, 7, 237);
+}
+
+.error-message {
+  font-size: 2em;
+  /* width: fit-content; */
+  color: red;
+  padding-left: 0.5em;
 }
 
 

@@ -15,6 +15,8 @@
 
 7. top nav bar of mobile version is buggy
 
+8. rounding numbers
+
 ## questions
 
 * only 10 bricks should be loaded at a time
