@@ -17,10 +17,14 @@
 
 8. rounding numbers
 
+9. set a limit so not all are loaded onto page at the same time
+
+10. checkout.js needs to be simplified
+
 ## questions
 
 * only 10 bricks should be loaded at a time
-* style goodbye message after the click so setAttribute isn't used there
 * references of where i got the bricks from
 * only one media query
 * how important are the bricks i have in the page atm (no colour)
+* create server folder

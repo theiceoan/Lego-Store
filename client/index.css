@@ -11,6 +11,14 @@ body {
   padding: 0;
 }
 
+img {
+  width: 10em;
+  height: 10em;
+  padding: 0em 2em 0em 2em;
+  border: 0.1em solid black;
+  /* box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset; */
+}
+
 .dropdown-cart {
   /* display: block;
   text-align: right;
@@ -19,21 +27,16 @@ body {
   position: relative;
 }
 
-img {
-  width: 10em;
-  height: 10em;
-  padding: 0em 2em 0em 2em;
-  box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset;
-}
-
-
 #lego-brick-section {
   /* display: grid; */
-  padding: 2em 0em 0em 0em;
+  padding: 2em 0em 0em 4em;
+  /* padding: 2em; */
 }
 
 .brick-container {
   display: inline-block;
+  border: 0.5em inset aqua;
+  padding: 1em 1em 1em 1em;
 }
 
 div {
@@ -69,27 +72,6 @@ aside {
   background-color: aqua;
 }
 
-.dropdown-content {
-  display: none;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  max-height: 20em;
-  overflow: scroll;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content p {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content p:hover {background-color: #ddd}
-
-.show {display:block;}
-
 .brick-details {
   float: right;
   padding: 0em 0em 0em 1em;
@@ -121,15 +103,24 @@ aside {
     cursor: pointer;
   }
 
+  #lego-brick-section {
+    padding: 2em 0em 0em 2em;
+  }
+
   img {
-    width: 25em;
-    height: 25em;
+    width: 20em;
+    height: 20em;
     /* padding: 0em 2em 0em 2em; */
-    box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset;
+    /* box-shadow: 0.5em 0.5em 1em rgb(0, 217, 255) inset; */
     -webkit-transform: scale(1);
 	  transform: scale(1);
 	  -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
+  }
+
+  .brick-container {
+    padding: 2em;
+    border: 0.2em solid aqua;
   }
 
   img:hover {
@@ -244,6 +235,10 @@ span {
   /* width: fit-content; */
   color: red;
   padding-left: 0.5em;
+}
+
+.goodbye-message {
+  font-size: 4em;
 }
 
 
