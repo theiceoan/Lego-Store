@@ -2,6 +2,7 @@
 /* eslint-disable eqeqeq */
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 import { addToLocalStorage } from './shopping-cart.mjs';
+// import { insufficientStockMessage } from './maintainStock.mjs';
 // import { cartContents } from './shopping-cart.mjs';
 // import { addToCart } from './shopping-cart.mjs';
 
@@ -23,6 +24,8 @@ function showBricks(bricks, where) {
     img.dataset.name = brick.name;
     img.dataset.price = brick.price;
     img.dataset.id = brick.id;
+    const errorMessage = document.createElement('p');
+    errorMessage.className = 'error-message';
 
     // name and price
     const brickDetails = document.createElement('p');
@@ -48,12 +51,14 @@ function showBricks(bricks, where) {
 
 
     brickContainer.append(img);
+    brickContainer.append(errorMessage);
     brickContainer.append(brickDetails);
     brickContainer.append(addToCartButton);
     brickContainer.append(numberDisplay);
     where.append(brickContainer);
 
     addToCartButton.addEventListener('click', addToLocalStorage);
+    // addToCartButton.addEventListener('click', insufficientStockMessage);
     img.addEventListener('click', viewDescription);
     // addToCartButton.addEventListener('click', addToBasket);
     // addToCartButton.addEventListener('click', addToCart);

@@ -17,9 +17,11 @@ function createBasket() {
 
       const img = document.createElement('img');
       const brickDetails = document.createElement('p');
-      brickDetails.classList.add('brick-details');
+      const errorMessage = document.createElement('p');
+      brickDetails.className = 'brick-details';
+      errorMessage.className = 'error-message';
       const cartbrickContainer = document.createElement('div');
-      cartbrickContainer.className = 'checkout-content';
+      cartbrickContainer.append(errorMessage);
 
       // icon to remove brick
       const removeBrickIcon = document.createElement('span');
@@ -87,7 +89,7 @@ function editTotalPrice() {
     totalPrice += (storedBrick.price * storedBrick.count);
     totalPriceElement.textContent = `Total Price: £${totalPrice.toFixed(2)}`;
   }
-  console.log(totalPriceElement);
+  // console.log(totalPriceElement);
 }
 
 function basketEmpty() {
@@ -105,15 +107,20 @@ function basketEmpty() {
 
 function updateBasket(e) {
   const brickDetails = e.target.previousSibling.lastChild;
+  const errorMessage = e.target.previousSibling.firstChild;
   // const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   for (const storedBrick of cartContents) {
-    if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0) {
+    if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0 && storedBrick.stock > e.target.nextSibling.value) {
+      errorMessage.textContent = '';
       // console.log(cartContents);
       storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
       storedBrick.stock = Number(storedBrick.stock) - Number(e.target.nextSibling.value);
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       // console.log(storedBrick.count);
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
+    } else if (storedBrick.id == e.target.dataset.id && storedBrick.stock < e.target.nextSibling.value) {
+      // window.alert(`insufficient stock! Available stock: ${storedBrick.stock}`);
+      errorMessage.textContent = `Insufficient stock! Available stock: ${storedBrick.stock}`;
     }
   }
 }
