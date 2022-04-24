@@ -21,6 +21,8 @@
 
 10. checkout.js needs to be simplified
 
+11. don't fetch from database if brick is out of stock
+
 ## questions
 
 * only 10 bricks should be loaded at a time

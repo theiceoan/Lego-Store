@@ -178,7 +178,9 @@ aside {
   }
 
   .error-message {
-    font-size: 2em;
+    font-size: 1.5em;
+    color: red;
+    width: 100%;
   }
 }
 
@@ -231,10 +233,10 @@ span {
 }
 
 .error-message {
-  font-size: 2em;
+  /* font-size: 1.5em; */
   /* width: fit-content; */
   color: red;
-  padding-left: 0.5em;
+  /* padding-left: 0.5em; */
 }
 
 .goodbye-message {
