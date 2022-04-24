@@ -11,17 +11,13 @@
 
 5. grouping of event listeners
 
-6. add comments to code
+6. top nav bar of mobile version is buggy
 
-7. top nav bar of mobile version is buggy
+7. set a limit so not all are loaded onto page at the same time
 
-8. rounding numbers
+8. checkout.js needs to be simplified
 
-9. set a limit so not all are loaded onto page at the same time
-
-10. checkout.js needs to be simplified
-
-11. don't fetch from database if brick is out of stock
+9. don't fetch from database if brick is out of stock
 
 ## questions
 

@@ -24,7 +24,7 @@ const dbConn = init();
 
 export async function listBricks() {
   const db = await dbConn;
-  return db.all('SELECT * FROM Bricks');
+  return db.all('SELECT * FROM Bricks WHERE stock > 0');
   // return db.all('DROP TABLE Bricks');
 }
 

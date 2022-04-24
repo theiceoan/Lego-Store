@@ -110,7 +110,7 @@ function updateBasket(e) {
   const errorMessage = e.target.previousSibling.firstChild;
   // const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   for (const storedBrick of cartContents) {
-    if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0 && storedBrick.stock > e.target.nextSibling.value) {
+    if (storedBrick.id == e.target.dataset.id && e.target.nextSibling.value > 0 && storedBrick.stock >= e.target.nextSibling.value) {
       errorMessage.textContent = '';
       // console.log(cartContents);
       storedBrick.count = Math.round(Number(storedBrick.count) + Number(e.target.nextSibling.value));
