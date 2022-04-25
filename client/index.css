@@ -93,6 +93,12 @@ aside {
   float: right;
 }
 
+.remove-brick-icon {
+  font-size: 2em;
+  position: absolute;
+  left: 2.5em;
+}
+
 @media(max-width:65em) {
   .btn, #login, #logout {
     background-color: rgb(0, 132, 255);
@@ -181,6 +187,12 @@ aside {
     font-size: 1.5em;
     color: red;
     width: 100%;
+  }
+
+  .remove-brick-icon {
+    position: absolute;
+    left: 1em;
+    font-size: 3em;
   }
 }
 
