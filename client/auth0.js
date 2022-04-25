@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 async function fetchAuthConfig() {
   const response = await fetch('/auth-config');
   if (response.ok) {
