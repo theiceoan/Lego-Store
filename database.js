@@ -35,6 +35,7 @@ export async function findBrick(id) {
 
 export async function editBrickQuantity(updatedBrick) {
   const db = await dbConn;
+  console.log(updatedBrick);
 
   const id = updatedBrick.id;
   const name = updatedBrick.name;
