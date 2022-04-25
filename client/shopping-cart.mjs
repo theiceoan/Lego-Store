@@ -68,18 +68,6 @@ export async function addToLocalStorage(e) {
   cartTally();
 }
 
-// function cartTally() {
-// const cartCounter = document.querySelector('.total-count');
-// const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-//
-// let brickTally = 0;
-// for (const storedBrick of storedBricks) {
-// brickTally += storedBrick.count;
-// cartCounter.textContent = brickTally;
-// }
-// }
-//
-
 function cartTally() {
   let brickTally = 0;
   const cartCounter = document.querySelector('.total-count');
