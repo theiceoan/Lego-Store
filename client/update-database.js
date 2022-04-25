@@ -1,14 +1,10 @@
+/* eslint-disable no-undef */
 // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/8/client/message.js
 
 const el = {};
 
-function getBrickIds() {
-  // console.log(window.localStorage.getItem('basket'));
-  return window.localStorage.getItem('basket');
-}
-
 /** Use fetch to put a JSON message to the server */
-async function sendBrick() {
+async function sendUpdatedBricks() {
   // const id = getBrickIds();
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   for (const storedBrick of storedBricks) {
@@ -24,12 +20,7 @@ async function sendBrick() {
     });
     // console.log(response.method);
     if (response.ok) {
-      // console.log(el.stock);
-      // el.stock = '';
-      console.log('hello world');
-      // const updatedBricks = await response.json();
-      // console.log(updatedBricks);
-      // showBrick(updatedBricks);
+      console.log('update successful!');
     } else {
       console.log('failed to send message', response);
     }
@@ -37,27 +28,8 @@ async function sendBrick() {
   window.localStorage.clear();
 }
 
-/**
-   * Page elements used in the program are
-   * setup here for convenience.
-   */
-function prepareHandles() {
+export function prepareHandles() {
   el.brickList = document.querySelector('#lego-brick-section');
   el.checkout = document.querySelector('#checkout');
+  el.checkout.addEventListener('click', sendUpdatedBricks);
 }
-
-/**
-   * Connect listeners for button clicks,
-   * keyboard input, etc.
-   */
-function addEventListeners() {
-  el.checkout.addEventListener('click', sendBrick);
-//   el.message.addEventListener('keyup', checkKeys);
-}
-
-function pageLoaded() {
-  prepareHandles();
-  addEventListeners();
-}
-
-window.addEventListener('load', pageLoaded);

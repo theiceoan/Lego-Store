@@ -4,24 +4,21 @@ import path from 'path';
 import url from 'url';
 
 import authConfig from './auth-config.js';
-// import { bricks } from './data-testing.js';
-import * as sl from './serverLogic.js';
+import * as db from './database.js';
 
 const app = express();
-// this will serve the files present in static/ inside this stage
 app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), 'client')));
 
-// serve the auth config publicly
-app.get('/auth-config', (req, res) => {
+app.get('/auth-config', (_req, res) => {
   res.json(authConfig);
 });
 
-async function getBricks(req, res) {
-  res.json(await sl.listBricks());
+async function getBricks(_req, res) {
+  res.json(await db.listBricks());
 }
 
 async function getBrick(req, res) {
-  const result = await sl.findBrick(req.params.id);
+  const result = await db.findBrick(req.params.id);
   if (!result) {
     res.status(404).send('No match for that ID');
     return;
@@ -30,8 +27,7 @@ async function getBrick(req, res) {
 }
 
 async function putBrick(req, res) {
-  const brick = await sl.editBrickQuantity(req.body);
-  // console.log(brick, req.body);
+  const brick = await db.editBrickQuantity(req.body);
   res.json(brick);
 }
 
@@ -46,11 +42,7 @@ app.get('/bricks', asyncWrap(getBricks));
 app.get('/bricks/:id', asyncWrap(getBrick));
 app.put('/bricks/:id', express.json(), asyncWrap(putBrick));
 
-// app.post('/bricks', express.json(), (req, res) => {
 
-// })
-
-// start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);

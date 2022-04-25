@@ -3,68 +3,64 @@
 // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/4/client/index.js
 export const cartContents = [];
 export const dummyIDs = [];
-// const cartItemQuantity = [];
 
 export async function addToLocalStorage(e) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
+  const brickQuantity = e.target.nextSibling.value;
+  const errorMessage = e.target.parentElement.firstChild.nextSibling;
+  errorMessage.textContent = '';
   const response = await fetch('/bricks/' + brickID);
   if (response.ok) {
-    const errorMessage = e.target.parentElement.firstChild.nextSibling;
-    errorMessage.textContent = '';
-    const rawDetails = await response.json();
-    if (rawDetails.stock >= e.target.nextSibling.value) {
-    // brickids is supposed to replace dummyids in the indexof but not working atm
+    const brickData = await response.json();
+    // preventing user adding more bricks than available
+    if (brickData.stock >= brickQuantity) {
       const brickids = window.localStorage.getItem('brickids');
-      // console.log(rawDetails.count);
-      // rawDetails.count = Number(e.target.nextSibling.value);
+
+      // first brick to be added
       if (brickids == null) {
-        rawDetails.count = Math.ceil(Number(e.target.nextSibling.value));
-        rawDetails.stock = Number(rawDetails.stock) - Number(rawDetails.count);
-        // cartItemQuantity.push(rawDetails.count);
-        dummyIDs.push(rawDetails.id);
+        brickData.count = Math.ceil(Number(brickQuantity));
+        brickData.stock = Number(brickData.stock) - Number(brickData.count);
+        // cartItemQuantity.push(brickData.count);
+        dummyIDs.push(brickData.id);
         window.localStorage.setItem('brickids', dummyIDs);
 
-        cartContents.push(rawDetails);
+        cartContents.push(brickData);
         // possibly creating a local storage for the quantity only
         // window.localStorage.setItem('quantity', )
         window.localStorage.setItem('basket', JSON.stringify(cartContents));
-      // console.log('hello world');
-      } else if (brickids.indexOf(rawDetails.id) == -1 && e.target.nextSibling.value > 0 && rawDetails.stock >= e.target.nextSibling.value) {
+
+        // new bricks
+      } else if (brickids.indexOf(brickData.id) == -1 && brickQuantity > 0 && brickData.stock >= brickQuantity) {
         const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
-        rawDetails.count = Math.ceil(Number(e.target.nextSibling.value));
-        rawDetails.stock = Number(rawDetails.stock) - Number(rawDetails.count);
-        // console.log(rawDetails);
-        storedBricks.push(rawDetails);
-        dummyIDs.push(rawDetails.id);
+        brickData.count = Math.ceil(Number(brickQuantity));
+        brickData.stock = Number(brickData.stock) - Number(brickData.count);
+        storedBricks.push(brickData);
+        dummyIDs.push(brickData.id);
         window.localStorage.setItem('brickids', dummyIDs);
 
         window.localStorage.setItem('basket', JSON.stringify(storedBricks));
-      } else if (brickids.indexOf(rawDetails.id) != -1 && e.target.nextSibling.value > 0 && rawDetails.stock > e.target.nextSibling.value) {
-      // console.log('hello ice');
+        // editing bricks already in cart
+      } else if (brickids.indexOf(brickData.id) != -1 && brickQuantity > 0 && brickData.stock > brickQuantity) {
         const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
         for (const storedBrick of storedBricks) {
-          if (storedBrick.id == rawDetails.id && storedBrick.stock >= e.target.nextSibling.value) {
-            storedBrick.count = Number(storedBrick.count) + Math.ceil(Number(e.target.nextSibling.value));
-            storedBrick.stock = Number(storedBrick.stock) - Math.ceil(Number(e.target.nextSibling.value));
+          if (storedBrick.id == brickData.id && storedBrick.stock >= brickQuantity) {
+            storedBrick.count = Number(storedBrick.count) + Math.ceil(Number(brickQuantity));
+            storedBrick.stock = Number(storedBrick.stock) - Math.ceil(Number(brickQuantity));
             window.localStorage.setItem('basket', JSON.stringify(storedBricks));
           // console.log(storedBrick.count);
-          } else if (storedBrick.stock < e.target.nextSibling.value) {
+          } else if (storedBrick.stock < brickQuantity) {
             console.log('no ways');
-            errorMessage.textContent = `insufficient stock! Available stock: ${rawDetails.stock}`;
+            errorMessage.textContent = `insufficient stock! Available stock: ${brickData.stock}`;
           }
           console.log(storedBrick.count);
         }
       }
     } else {
-      // window.alert(`insufficient stock! Available stock: ${rawDetails.stock}`);
-      console.log('defs');
-      errorMessage.textContent = `insufficient stock! Available stock: ${rawDetails.stock}`;
+      errorMessage.textContent = `insufficient stock! Available stock: ${brickData.stock}`;
     }
-    // console.log(cartContents);
   } else {
     console.log('failed to send message', response);
   }
-  // addToBasket();
   cartTally();
 }
 
@@ -85,5 +81,3 @@ function cartTally() {
 }
 
 window.addEventListener('load', cartTally);
-
-//
