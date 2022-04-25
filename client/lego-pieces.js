@@ -1,5 +1,5 @@
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
-import { addToLocalStorage } from './shopping-cart.mjs';
+import { addToCart } from './shopping-cart.mjs';
 
 const el = {};
 
@@ -46,7 +46,7 @@ function showBricks(bricks, where) {
 
     where.append(brickContainer);
 
-    addToCartButton.addEventListener('click', () => addToLocalStorage(brick, brickContainer));
+    addToCartButton.addEventListener('click', () => addToCart(brick, brickContainer));
     img.addEventListener('click', viewBrickDescription);
   }
 }
