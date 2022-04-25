@@ -6,14 +6,14 @@ export const cartContents = [];
 
 export function addToCart(brick, brickContainer) {
   console.log(brick, brickContainer);
-  const errorMessage = brickContainer.firstChild.nextSibling;
-  errorMessage.textContent = '';
+  const brickMessage = brickContainer.firstChild.nextSibling;
+  brickMessage.textContent = '';
   const requestedQuantity = brickContainer.lastChild.valueAsNumber;
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
   // console.log(requestedQuantity);
 
   if (requestedQuantity > brick.stock) {
-    errorMessage.textContent = `insufficient stock! Available stock: ${brick.stock}`;
+    brickMessage.textContent = `insufficient stock! Available stock: ${brick.stock}`;
     return;
   }
 

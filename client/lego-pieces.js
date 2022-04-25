@@ -15,9 +15,9 @@ function showBricks(bricks, where) {
     img.dataset.id = brick.id;
     brickContainer.append(img);
 
-    const errorMessage = document.createElement('p');
-    errorMessage.className = 'error-message';
-    brickContainer.append(errorMessage);
+    const brickMessage = document.createElement('p');
+    brickMessage.className = 'error-message';
+    brickContainer.append(brickMessage);
 
     // name and price
     const brickDetails = document.createElement('p');
@@ -48,6 +48,14 @@ function showBricks(bricks, where) {
 
     addToCartButton.addEventListener('click', () => addToCart(brick, brickContainer));
     img.addEventListener('click', viewBrickDescription);
+    showLowQuantityMessage(brick, brickContainer);
+  }
+}
+
+function showLowQuantityMessage(brick, brickContainer) {
+  const brickMessage = brickContainer.firstChild.nextSibling;
+  if (brick.stock <= 10) {
+    brickMessage.textContent = `Quantity at ${brick.stock}, hurry!`;
   }
 }
 
