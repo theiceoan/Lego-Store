@@ -4,9 +4,9 @@
 export const cartContents = [];
 export const dummyIDs = [];
 
-export async function addToLocalStorage(e) {
+export async function addToLocalStorage(brick, brickContainer) {
   const brickID = e.target.parentElement.firstChild.dataset.id;
-  const brickQuantity = e.target.nextSibling.value;
+  const brickQuantity = e.target.nextSibling.valueAsNumber;
   const errorMessage = e.target.parentElement.firstChild.nextSibling;
   errorMessage.textContent = '';
   const response = await fetch('/bricks/' + brickID);
@@ -81,3 +81,6 @@ function cartTally() {
 }
 
 window.addEventListener('load', cartTally);
+
+// const bricks = [ ... { id: ... }, ...]
+// const brickIDs = bricks.map(b => b.id);

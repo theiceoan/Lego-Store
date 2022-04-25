@@ -46,7 +46,7 @@ function showBricks(bricks, where) {
 
     where.append(brickContainer);
 
-    addToCartButton.addEventListener('click', addToLocalStorage);
+    addToCartButton.addEventListener('click', () => addToLocalStorage(brick, brickContainer));
     img.addEventListener('click', viewBrickDescription);
   }
 }
