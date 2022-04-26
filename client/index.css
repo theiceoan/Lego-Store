@@ -39,6 +39,7 @@ img {
   padding: 1em 1em 1em 1em;
 }
 
+
 div {
   width: fit-content;
 }
@@ -107,6 +108,14 @@ aside {
     font-size: 35px;
     border: none;
     cursor: pointer;
+  }
+
+  #price, #name, #stock, #description, #image, #send {
+    font-size: 2em;
+  }
+
+  #image-file {
+    font-size: 1em;
   }
 
   #lego-brick-section {

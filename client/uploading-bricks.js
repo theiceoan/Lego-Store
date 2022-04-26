@@ -1,7 +1,8 @@
 // adapted from https://github.com/portsoc/staged-simple-message-board/tree/master/stages/10
 
 import { auth0 } from './auth0.js';
-import { showBricks, el } from './lego-pieces.js';
+import { showBricks } from './lego-pieces.js';
+// import FormData from 'form-data';
 
 function removeContentFrom(what) {
   what.textContent = '';
@@ -13,6 +14,7 @@ export async function verifyAdminLogin() {
 
   if (isAuthenticated) {
     createUploadElements();
+    setupListeners();
   }
 }
 
@@ -66,12 +68,22 @@ function createUploadElements() {
 }
 
 async function sendBrick() {
+  const legoBrickSection = document.querySelector('#lego-brick-section');
+  const name = document.querySelector('#name');
+  const price = document.querySelector('#price');
+  const stock = document.querySelector('#stock');
+  const description = document.querySelector('#description');
+  // const send = document.querySelector('#send');
+  const fileImage = document.querySelector('#image-file');
+
   const payload = new FormData();
-  payload.append('name', el.name.value);
-  payload.append('price', el.price.value);
-  payload.append('stock', el.stock.value);
-  payload.append('description', el.description.value);
-  payload.append('image', el.fileImage.files[0]);
+  payload.append('name', name.value);
+  payload.append('price', price.value);
+  payload.append('stock', stock.value);
+  payload.append('count', 0);
+  payload.append('description', description.value);
+  payload.append('src', fileImage.files[0]);
+  console.log(payload);
 
   const response = await fetch('bricks', {
     method: 'POST',
@@ -79,29 +91,30 @@ async function sendBrick() {
   });
 
   if (response.ok) {
-    el.name.value = '';
-    el.price.value = '';
-    el.stock.value = '';
-    el.description.value = '';
+    name.value = '';
+    price.value = '';
+    stock.value = '';
+    description.value = '';
 
     const updatedBricks = await response.json();
-    removeContentFrom(el.legoBrickSection);
-    showBricks(updatedBricks, el.legoBrickSection);
+    removeContentFrom(legoBrickSection);
+    showBricks(updatedBricks, legoBrickSection);
   } else {
     console.log('failed to send message', response);
   }
 }
 
-function prepareHandles() {
-  el.legobricksection = document.querySelector('#lego-brick-section');
-  el.name = document.querySelector('#name');
-  el.price = document.querySelector('#price');
-  el.stock = document.querySelector('#stock');
-  el.description = document.querySelector('#description');
-  el.send = document.querySelector('#send');
-  el.fileImage = document.querySelector('#image-file');
+// function prepareHandles() {
+// el.legobricksection = document.querySelector('#lego-brick-section');
+// el.name = document.querySelector('#name');
+// el.price = document.querySelector('#price');
+// el.stock = document.querySelector('#stock');
+// el.description = document.querySelector('#description');
+// el.send = document.querySelector('#send');
+// el.fileImage = document.querySelector('#image-file');
+// }
+
+function setupListeners() {
+  document.querySelector('#send').addEventListener('click', sendBrick);
+  // window.addEventListener('load', prepareHandles);
 }
-
-el.send.addEventListener('click', sendBrick);
-
-window.addEventListener('load', prepareHandles);

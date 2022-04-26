@@ -43,7 +43,7 @@ async function putBrick(req, res) {
 }
 
 async function postBrick(req, res) {
-  const brick = await db.addBrick(req.body, req.file);
+  const brick = await db.addNewBrick(req.body, req.file);
   res.json(brick);
 }
 
@@ -57,7 +57,7 @@ function asyncWrap(f) {
 app.get('/bricks', asyncWrap(getBricks));
 app.get('/bricks/:id', asyncWrap(getBrick));
 app.put('/bricks/:id', express.json(), asyncWrap(putBrick));
-app.post('/bricks', uploader.single('image'), express.json(), asyncWrap(postBrick));
+app.post('/bricks', uploader.single('src'), express.json(), asyncWrap(postBrick));
 
 
 const PORT = process.env.PORT || 8080;
