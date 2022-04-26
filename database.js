@@ -16,18 +16,14 @@ async function init() {
   return db;
 }
 
-// async function init() {
-// await open({
-// filename: './database.sqlite',
-// verbose: true,
-// driver: sqlite3.Database,
-// }).then((db) => {
-// db.migrate({ migrationsPath: './migrations-sqlite' });
-// return db;
-// });
-// }
-
 const dbConn = init();
+
+// we need to be getting hold of the image icon in our page
+function addImagePath(brick) {
+  if (brick.file) {
+    brick.image = '/images/'
+  }
+}
 
 export async function listBricks() {
   const db = await dbConn;
