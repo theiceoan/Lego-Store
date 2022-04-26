@@ -25,6 +25,7 @@ function createUploadElements() {
   const nameInput = document.createElement('input');
   nameInput.id = 'name';
   nameInput.type = 'text';
+  nameInput.required = true;
   nameInput.placeholder = 'Add name of brick here...';
   headerElement.append(nameInput);
 
@@ -83,7 +84,7 @@ async function sendBrick() {
   payload.append('count', 0);
   payload.append('src', fileImage.files[0]);
   payload.append('description', description.value);
-  console.log(fileImage.files[0]);
+  // console.log(fileImage.files[0]);
 
   const response = await fetch('bricks', {
     method: 'POST',
