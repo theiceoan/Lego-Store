@@ -8,7 +8,7 @@ CREATE TABLE Bricks (
   price DOUBLE(4, 2) NOT NULL,
   stock INT NOT NULL,
   count INT NOT NULL,
-  src TEXT NOT NULL,
+  src TEXT,
   description TEXT NOT NULL
 );
 

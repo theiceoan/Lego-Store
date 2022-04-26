@@ -1,9 +1,9 @@
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 import { addToCart } from './shopping-cart.mjs';
 
-const el = {};
+export const el = {};
 
-function showBricks(bricks, where) {
+export function showBricks(bricks, where) {
   for (const brick of bricks) {
     const brickContainer = document.createElement('div');
     brickContainer.className = 'brick-container';

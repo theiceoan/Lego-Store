@@ -16,6 +16,10 @@
 
 8. multiple folders within client folder
 
+9. make use of uuid for the id's
+
+10. testing
+
 ## questions
 
 * only 10 bricks should be loaded at a time
@@ -25,3 +29,5 @@
 use e.target.closest('.brick').querySelector('.error');
 edit an api and add a parameter that specifies how many can be added
 return all the bricks to client, and specify how many you want
+
+point out that using id's of incrementing numbers at the beginning was weak however from that point on, you were going to use uuid

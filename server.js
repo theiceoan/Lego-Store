@@ -2,11 +2,22 @@
 import express from 'express';
 import path from 'path';
 import url from 'url';
+import multer from 'multer';
 
 import authConfig from './auth-config.js';
 import * as db from './database.js';
 
 const app = express();
+
+const uploader = multer({
+  dest: 'upload',
+  limits: { // for security
+    fields: 10,
+    fileSize: 1024 * 1024 * 20, // 20MB
+    files: 1,
+  },
+});
+
 app.use(express.static(path.join(path.dirname(url.fileURLToPath(import.meta.url)), 'client')));
 
 app.get('/auth-config', (_req, res) => {
@@ -31,6 +42,11 @@ async function putBrick(req, res) {
   res.json(brick);
 }
 
+async function postBrick(req, res) {
+  const brick = await db.addBrick(req.body, req.file);
+  res.json(brick);
+}
+
 function asyncWrap(f) {
   return (req, res, next) => {
     Promise.resolve(f(req, res, next))
@@ -41,6 +57,7 @@ function asyncWrap(f) {
 app.get('/bricks', asyncWrap(getBricks));
 app.get('/bricks/:id', asyncWrap(getBrick));
 app.put('/bricks/:id', express.json(), asyncWrap(putBrick));
+app.post('/bricks', uploader.single('image'), express.json(), asyncWrap(postBrick));
 
 
 const PORT = process.env.PORT || 8080;

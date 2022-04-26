@@ -2,6 +2,13 @@
 // import { bricks } from './data-testing.js';
 import sqlite from 'sqlite';
 // import sqlite3 from 'sqlite3';
+import uuid from 'uuid-random';
+import fs from 'fs';
+import util from 'util';
+import path from 'path';
+
+fs.renameAsync = fs.renameAsync || util.promisify(fs.rename);
+
 
 async function init() {
   const db = await sqlite.open('./database.sqlite', { verbose: true });
@@ -35,7 +42,7 @@ export async function findBrick(id) {
 
 export async function editBrickQuantity(updatedBrick) {
   const db = await dbConn;
-  console.log(updatedBrick);
+  // console.log(updatedBrick);
 
   const id = updatedBrick.id;
   const name = updatedBrick.name;
@@ -51,4 +58,19 @@ export async function editBrickQuantity(updatedBrick) {
   if (statement.changes === 0) throw new Error('brick not found');
 
   return findBrick(id);
+}
+
+export async function addNewBrick(brick) {
+  const db = await dbConn;
+
+  const id = uuid();
+  const name = brick.name;
+  const price = brick.price;
+  const stock = brick.stock;
+  const count = 0;
+  const description = brick.description;
+
+  await db.run('INSERT INTO Bricks VALUES (?, ?, ?, ?, ?, ?)', [id, name, price, stock, count, description]);
+
+  return listBricks();
 }
