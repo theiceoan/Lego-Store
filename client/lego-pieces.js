@@ -1,23 +1,24 @@
 // // adapted from https://github.com/portsoc/staged-simple-message-board/blob/master/stages/2/client/index.js
 import { addToCart } from './shopping-cart.mjs';
 
-const el = {};
+export const el = {};
 
-function showBricks(bricks, where) {
+export function showBricks(bricks, where) {
   for (const brick of bricks) {
     const brickContainer = document.createElement('div');
     brickContainer.className = 'brick-container';
 
     const img = document.createElement('img');
     img.src = brick.src;
+    img.className = 'image';
     img.dataset.name = brick.name;
     img.dataset.price = brick.price;
     img.dataset.id = brick.id;
     brickContainer.append(img);
 
-    const errorMessage = document.createElement('p');
-    errorMessage.className = 'error-message';
-    brickContainer.append(errorMessage);
+    const brickMessage = document.createElement('p');
+    brickMessage.className = 'error-message';
+    brickContainer.append(brickMessage);
 
     // name and price
     const brickDetails = document.createElement('p');
@@ -48,6 +49,14 @@ function showBricks(bricks, where) {
 
     addToCartButton.addEventListener('click', () => addToCart(brick, brickContainer));
     img.addEventListener('click', viewBrickDescription);
+    showLowQuantityMessage(brick, brickContainer);
+  }
+}
+
+function showLowQuantityMessage(brick, brickContainer) {
+  const brickMessage = brickContainer.firstChild.nextSibling;
+  if (brick.stock <= 10) {
+    brickMessage.textContent = `Quantity at ${brick.stock}, hurry!`;
   }
 }
 

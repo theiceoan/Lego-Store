@@ -12,9 +12,9 @@ function createBasket() {
       const cartbrickContainer = document.createElement('div');
       cartbrickContainer.className = 'cart-brick-container checkout-content';
 
-      const errorMessage = document.createElement('p');
-      errorMessage.className = 'error-message';
-      cartbrickContainer.append(errorMessage);
+      const brickMessage = document.createElement('p');
+      brickMessage.className = 'error-message';
+      cartbrickContainer.append(brickMessage);
 
       const removeBrickIcon = document.createElement('span');
       removeBrickIcon.className = 'remove-brick-icon';
@@ -95,18 +95,18 @@ function handleEmptyBasket() {
 
 function updateBasket(e) {
   const brickDetails = e.target.previousSibling.lastChild;
-  const errorMessage = e.target.previousSibling.firstChild;
+  const brickMessage = e.target.previousSibling.firstChild;
   const brickQuantity = e.target.nextSibling.value;
   for (const storedBrick of cartContents) {
     if (storedBrick.id == e.target.dataset.id && brickQuantity > 0 && storedBrick.stock >= brickQuantity) {
-      errorMessage.textContent = '';
+      brickMessage.textContent = '';
 
       storedBrick.count = Math.round(Number(storedBrick.count) + Number(brickQuantity));
       storedBrick.stock = Number(storedBrick.stock) - Number(brickQuantity);
       brickDetails.textContent = `Name: ${storedBrick.name}\r\nPrice: £${(storedBrick.price * storedBrick.count).toFixed(2)}\r\nQuantity: ${storedBrick.count}`;
       window.localStorage.setItem('basket', JSON.stringify(cartContents));
     } else if (storedBrick.id == e.target.dataset.id && storedBrick.stock < brickQuantity) {
-      errorMessage.textContent = `Insufficient stock! Available stock: ${storedBrick.stock}`;
+      brickMessage.textContent = `Insufficient stock! Available stock: ${storedBrick.stock}`;
     }
   }
 }

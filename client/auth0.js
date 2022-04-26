@@ -1,7 +1,10 @@
+import { verifyAdminLogin } from './uploading-bricks.js';
+
 /* eslint-disable no-undef */
 async function fetchAuthConfig() {
   const response = await fetch('/auth-config');
   if (response.ok) {
+    // console.log('response.json', response.json());
     return response.json();
   } else {
     throw response;
@@ -9,7 +12,7 @@ async function fetchAuthConfig() {
 }
 
 // global variable that is our entry point to the auth library
-let auth0 = null;
+export let auth0 = null;
 
 async function initializeAuth0Client() {
   const config = await fetchAuthConfig();
@@ -43,6 +46,7 @@ function logout() {
 // check for the code and state parameters from Auth0 login redirect
 async function handleAuth0Redirect() {
   const isAuthenticated = await auth0.isAuthenticated();
+  // console.log('authenticated', isAuthenticated);
 
   if (isAuthenticated) return;
 
@@ -75,4 +79,5 @@ export async function init() {
   await setupListeners();
   await updateAuthUI();
   await handleAuth0Redirect();
+  verifyAdminLogin();
 }
