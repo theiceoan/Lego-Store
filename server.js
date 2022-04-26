@@ -43,6 +43,7 @@ async function putBrick(req, res) {
 }
 
 async function postBrick(req, res) {
+  console.log(req.body);
   const brick = await db.addNewBrick(req.body, req.file);
   res.json(brick);
 }

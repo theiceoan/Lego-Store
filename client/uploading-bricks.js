@@ -81,9 +81,9 @@ async function sendBrick() {
   payload.append('price', price.value);
   payload.append('stock', stock.value);
   payload.append('count', 0);
-  payload.append('description', description.value);
   payload.append('src', fileImage.files[0]);
-  console.log(payload);
+  payload.append('description', description.value);
+  console.log(fileImage.files[0]);
 
   const response = await fetch('bricks', {
     method: 'POST',

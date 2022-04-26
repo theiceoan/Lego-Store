@@ -76,7 +76,8 @@ export async function addNewBrick(brick, file) {
   const price = brick.price;
   const stock = brick.stock;
   const count = 0;
-  const src = `bricks/${id}`;
+  const src = `bricks/lego_pieces/${newFilename}`;
+  // console.log(newFilename);
   const description = brick.description;
 
   await db.run('INSERT INTO Bricks VALUES (?, ?, ?, ?, ?, ?, ?)', [id, name, price, stock, count, src, description]);

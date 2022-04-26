@@ -10,6 +10,7 @@ export function showBricks(bricks, where) {
 
     const img = document.createElement('img');
     img.src = brick.src;
+    img.className = 'image';
     img.dataset.name = brick.name;
     img.dataset.price = brick.price;
     img.dataset.id = brick.id;
