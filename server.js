@@ -63,5 +63,5 @@ app.post('/bricks', uploader.single('src'), express.json(), asyncWrap(postBrick)
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}!`);
+  console.log(`Lego Store App listening on port ${PORT}!`);
 });

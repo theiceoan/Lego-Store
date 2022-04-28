@@ -52,7 +52,7 @@ function cartTally() {
   const storedBricks = JSON.parse(window.localStorage.getItem('basket'));
 
   if (storedBricks == null) {
-    console.log('hello world');
+    // console.log('hello world');
     cartCounter.textContent = 0;
   } else {
     for (const storedBrick of storedBricks) {
