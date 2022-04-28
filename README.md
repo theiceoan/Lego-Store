@@ -38,6 +38,8 @@
   * it is assumed that any user that logs in is admin because creating an admin only view would require getting your email addresses etc.
 
 * The user is able to login
+* The user is alerted of which bricks are almost finished (when stock reaches less than 10);
+* User is given an error message if they attempt buy more of a brick than in stock
 
 * User is able to use both desktop and mobile versions
 
